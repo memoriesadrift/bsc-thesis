@@ -1,1 +1,21 @@
 /notes/*
+
+# Latex Artifacts
+src/main.acn
+src/main.aux
+src/main.bbl
+src/main.blg
+src/main.fdb_latexmk
+src/main.fls
+src/main.glo
+src/main.ist
+src/main.loa
+src/main.lof
+src/main.log
+src/main.lol
+src/main.lot
+src/main.out
+src/main.pdf
+src/main.toc
+src/pdfa.xmpi
+
