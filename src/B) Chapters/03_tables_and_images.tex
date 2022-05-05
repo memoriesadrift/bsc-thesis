@@ -1,0 +1,56 @@
+	\chapter{Tables and Images}
+	One of the great advantages of \LaTeX{} is that all it needs to know is
+	the structure of a document, and then it will take care of the layout
+	and presentation itself.  So, here we shall begin looking at how exactly
+	you tell \LaTeX{} what it needs to know about your document.
+	
+	\subsection{Tables}
+	In this sub-section, a simple table is inserted. To add reference to the table, see (cf. Table~\hyperref[tab:table example]{\ref{tab:table example}}):
+	
+	%A simple table.  The center environment is first set up, otherwise the
+	%table is left aligned.  The tabular environment is what tells Latex
+	%that the data within is data for the table.
+	\begin{table}[htb]
+		\centering
+		\begin{tabular}{|p{5,5cm}|c|}
+			%The tabular environment is what tells Latex that the data within is
+			%data for the table.  The arguments say that there will be two
+			%columns, both left justified (indicated by the 'l', you could also
+			%have 'c' or 'r'.  The bars '|' indicate vertical lines throughout
+			%the table.
+			
+			\hline  % Print horizontal line
+			Command & Level \\ \hline  % Columns are delimited by '&'.  And
+			%rows are delimited by '\\'
+			\texttt{\textbackslash part\{\emph{part}\}} & -1 \\
+			\texttt{\textbackslash chapter\{\emph{chapter}\}} & 0 \\
+			\texttt{\textbackslash section\{\emph{section}\}} & 1 \\
+			\texttt{\textbackslash subsection\{\emph{subsection}\}} & 2 \\
+			\texttt{\textbackslash subsubsection\{\emph{subsubsection}\}} & 3 \\
+			\texttt{\textbackslash paragraph\{\emph{paragraph}\}} & 4 \\
+			\texttt{\textbackslash subparagraph\{\emph{subparagraph}\}} & 5 \\
+			\hline
+			
+		\end{tabular}
+		\caption{some description of the table}
+		\label{tab:table example}
+	\end{table}
+	
+	\subsection{Images}
+	% Here is how to insert an image as a figure. There is a lot more you can do
+	% when inserting images, check out: https://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+	
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=0.3\textwidth]{figures/logo_nontransparent.jpg}
+		\caption{Image Example}
+		\label{fig:image_example}
+	\end{figure}
+	
+	When an image is inserted, you can refer to it like this (cf. Figure~\hyperref[fig:image_example]{\ref{fig:image_example}}).
+	
+	\subsubsection{A Subsubsection}
+	As one last example, this is how you can insert a sub-sub-section! Have fun
+	writing your thesis with \LaTeX{}!
+	
+	\pagebreak

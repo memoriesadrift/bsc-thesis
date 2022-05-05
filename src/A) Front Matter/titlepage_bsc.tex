@@ -1,0 +1,34 @@
+% --CHANGE THE TITLEPAGE HERE
+
+% title page provided in Word by the University which can be found here 
+% https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/bachelorarbeit-empfehlungen/ 
+% Please pay attention to the guidelines that can be found there!
+% If you want you can always create the titlepage in Word and then add it with \includepdf{<filename>} from the pdfpages package to your thesis.
+%
+
+
+%Do not change or delete the following two lines
+\renewcommand{\TitleSetup}{BACHELORARBEIT / BACHELOR'S THESIS}
+\renewcommand{\TitleTitleSetup}{Titel der Bachelorarbeit / Title of the Bachelor's Thesis\par}
+% Change the rest of the lines to fit you thesis
+
+% There are some commands also for multiple lines. If something exceeds more than a line use the multi line commands. In the worst case adjust the vertical spaces within the class.
+% -- Title Page
+\Title{Fileformat Security - Hiding Executable Code in Data Files}
+% A title exceeding one line can be created using the \TitleTwo or \TitleThree command
+%\TitleTwo{I wish I \\ had a Bachelor's Degree}
+%\TitleThree{I wish I \\ had a Bachelor's \\ Degree}
+\Who{Samuel Šulovský} %Make sure you add all your titles! 
+% A name exceeding one line can be created using the \WhoTwo command
+%\WhoTwo{ FirstName \\ LastName }
+\Degree{Bachelor of Science (BSc)}
+\Year{2022}
+\ProgrammeCode{033521}
+\ProgrammeName{Bachelorstudium Informatik} %Make sure it has the same Name as in the Studienblatt
+\Supervisor{Univ.-Prof. Dipl.-Ing. Mag. Dr.techn. Edgar Weippl}
+%\SupervisorTwo{Second Row} % Here you can change the row under the supervisor
+\CoSupervisor{0} %remove this line if there is a Co supervisor
+%\CoSupervisor{Professor Co}
+%\CoSupervisorTwo{Second Row} % Here you can change the row under the cosupervisor
+
+\Titlepage %This generates the titlepage

@@ -1,0 +1,160 @@
+\chapter{Using the template}
+	
+Welcome to the Latex Template of the Computer Science department of the university of Vienna. 
+\url{https://informatik.univie.ac.at/en/}
+
+General information about finishing your Bachelors degree can be found here:
+\begin{enumerate}
+    \item \url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/studienabschluss/abschluss-des-bachelor-studiums/}
+    \item \url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/bachelorarbeit-empfehlungen/}
+\end{enumerate}
+
+General information about finishing your Masters degree can be found here:
+\begin{enumerate}
+    \item \url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/wegweiser-masterstudium/approbation-der-masterarbeit/}
+    \item \url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/wegweiser-masterstudium/anmeldung-masterarbeit-themenfindung/}
+    \item \url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/wegweiser-masterstudium/anmeldung-zur-masterpruefung/}
+\end{enumerate}
+
+General information about finishing your Doctors degree can be found here:
+\begin{enumerate}
+    \item \url{https://doktorat.univie.ac.at/doktoratsablauf/abschlussphase/einreichen-und-begutachtung/}
+
+\end{enumerate}
+	
+\section{Using the template}
+
+Everything in the template revolves around the \verb|main.tex| file. Here all the other files are put together to create the thesis.
+There are 3 different sections to consider: Front Matter, Chapters and Back Matter. Each section has a folder where you can put the different parts of your thesis. In the Front Matter section you should put everything that comes before your first chapter of the thesis. Respectively, in the Back Matter section you put everything that comes after your last chapter. And finally all the chapters are put into the Chapters folder. You can put thing like abstract, summaries, etc... wherever they suit your thesis. In the end it really only matters how you add them into your \verb|main.tex| file. With the \verb|\input{}| command you can add the parts if they should appear in your thesis, the order within the \verb|main.tex| also determines the order in the final pdf. Also depending on whether you do your BSc, MSc or Phd you should add the corresponding titlepage in the main.tex file and then delete the tex files of the other two.
+
+\subsection{Title-page}
+The Layout of the Title-page is in the \verb|UniVieCS_Thesis.cls| and should normally not be changed. You can use all the commands as seen in the \verb|Titlepage.tex|. 
+
+The template and also the title-page is based on the scrbook class. So if you want to use a different class without changing the title page I would recommend using the template for creating the title page and then use it in your project using the 
+\verb|\includepdf{<filename>}| from the \verb|pdfpages| package. \textbf{Alternatively, if you encounter any problems with the title page, you can also always use the word template for the title- page and add it using this package.} In that way you can avoid any differences to the original title page template. The word templates can be found here:
+\begin{enumerate}
+    \item \url{https://informatik.univie.ac.at/en/study/support-for-students/bachelor-thesis-guidelines/}
+    \item \url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/wegweiser-masterstudium/approbation-der-masterarbeit/ }
+    \item \url{https://doktorat.univie.ac.at/doktoratsablauf/abschlussphase/einreichen-und-begutachtung/}
+
+\end{enumerate}
+
+If you use the \verb|includepdf| package make sure that the pdf still has the correct metadata afterwards.
+
+
+\section{Creating the pdf}
+To create a proper pdf file of your thesis there are some things to consider
+\subsection{Embed all fonts in pdf}
+Please make sure that you embed all fonts in your pdf. Also make sure all the fonts of any figures that were used in the document are embedded. 
+If you don't use any pdf figures pdfLaTeX should embed all fonts automatically.
+
+\subsubsection{Linux}
+On Linux you can use the command \begin{verbatim}
+    pdffonts my_file.pdf
+\end{verbatim}
+to check if the fonts are embbeded. Check if all the fonts listed have a "yes" in the "emb" column. 
+\begin{verbatim}
+name                                 type              encoding         emb sub uni 
+------------------------------------ ----------------- ---------------- --- --- --- 
+BXJBCJ+NimbusSanL-Bold               Type 1            Custom           yes yes no     
+HEMYJL+NimbusSanL-Regu               Type 1            Custom           yes yes no     
+OOJWDR+SFRM1000                      Type 1            Custom           yes yes no      
+OHLNOC+SFRM0900                      Type 1            Custom           yes yes no   
+...
+\end{verbatim}
+For more information see 
+
+\url{https://www.karlrupp.net/2016/01/embed-all-fonts-in-pdfs-latex-pdflatex/}
+\subsubsection{Windows}
+On Windows using the Adobe Acrobat Reader the fonts can be found at
+\begin{verbatim}
+File > Properties > Fonts
+\end{verbatim}
+For more information please consult
+\begin{enumerate}
+\item \url{https://helpx.adobe.com/acrobat/using/pdf-fonts.html}
+
+\item \url{https://www.overleaf.com/learn/latex/Questions/My_submission_was_rejected_by_the_journal_because_%22Font_XYZ_is_not_embedded%22._What_can_I_do%3F} 
+\end{enumerate}
+
+\subsection{Making a PDF/A-1 compatible pdf}
+% Making the the work PDF/A compatible:
+%"Für die Ablieferung Ihrer Abschlussarbeit in elektronischer Form sind als einziges Dateiformat PDF-Dokumente in der von Adobe spezifizierten Version PDF/A-1 bzw. PDF/A-2 erlaubt."
+% https://hopla.univie.ac.at/erstellen_von_pdf.pdf
+As can be seen in \url{https://hopla.univie.ac.at/erstellen_von_pdf.pdf} and the "Informationen zur Erstellung und Abgabe von Hochschulschriften" it is required to provide a PDF/A-1 or PDF/A-2 version of your thesis.
+
+\subsubsection{validation}
+To validate the produced PDF you can either use the Preflight tool included in Adobe Acrobat Pro or a free online version. E.g. \url{https://www.pdf-online.com/osa/validate.aspx}.
+Please take caution as different validation tools can report different results.
+
+\subsubsection{pdfx}
+First step to get PDF/A combatibility is by using the package \verb|pdfx| - make sure it is included before the hyperref package.
+\begin{verbatim}
+\usepackage[a-1b]{pdfx}
+\end{verbatim}
+This package is already included in the class.
+For more details about the package and the following steps please consult \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf}
+
+\subsubsection{metadata}
+There is a section in the beginning of the .tex file where you can change the metadata.
+Change your Name, Title, Subject, Keywords and remove/add Information as you like. To find out what fields are possible please check here. \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf#subsection.2.3}
+
+A file containing the metadata (jobname.xmpdata) is created when compiling. 
+
+Watch out, the metadata .xmpdata file is only created one time. So if you need to update it you need to clear the cache of overleaf. Or delete the .xmpdata file. It is then recreated the next time you compile. 
+
+\url{https://www.overleaf.com/learn/how-to/Clearing_the_cache}
+
+You can check the metadata of your PDF with Acrobat Reader by going to File-> properties. Or alternatively check it with an online tool.
+
+\subsubsection{figures}
+As already mentioned, make sure that all the fonts used in the pictures are included. Furthermore transparency in pictures causes issues, please convert transparent figures into their nontransparent version. 
+
+Using Linux the command \verb|pdfimages -list <pdf>| shows the typpe of all images used. The type should always be \verb|image| and not \verb|smask|. Check and convert these images.
+
+\subsubsection{color}
+Additionally there can be problems if figures use different color spaces. Use the same command as before and check if all images use the same color. 
+
+If color is really important in your work it might also be a good idea to use an ICC profile for the color. 
+For more details about colors check \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf#subsection.2.5}
+
+It is also possible to convert the pictures automatically using ghostscript. But always check the results manually. 
+
+\subsubsection{Other errors}
+Due to the complexity of Latex files there can be many more errors that are not covered in the readme.
+
+The Preflight tool included in Adobe Acrobat Pro also has the ability to fix some errors. For example EOL (End of Line) errors can be fixed with its analyize and fix option. 
+Please also check if any of the following pages might have a solution to your problem:
+\begin{enumerate}
+    \item \url{https://www.mathstat.dal.ca/~selinger/pdfa/}
+    \item \url{https://blog.zhaw.ch/icclab/creating-pdfa-documents-for-long-term-archiving/}
+    \item german: \url{http://kulturreste.blogspot.com/2014/06/grrrr-oder-wie-man-mit-latex-vielleicht.html}
+    \item \url{https://support.stmdocs.in/wiki/?title=Generating_PDF/A_compliant_PDFs_from_pdftex}
+    \item \url{http://texdoc.net/texmf-dist/doc/latex/pdfx/pdfx.pdf}
+\end{enumerate}
+
+\subsubsection{Tagged PDF}
+Currently with Latex it is only possible to create files that are in the PDF/A-1b format. The PDF/A-1a format required the PDF to be tagged which is currently not possible in a satisfactory way.
+A manual tagging with Adobe Acrobat Pro is possible but not recommended.
+
+More information about the current status of tagged pdfs can be found here:
+\begin{enumerate}
+\item \url{https://umij.wordpress.com/2016/08/11/the-sad-state-of-pdf-accessibility-of-latex-documents/} 
+\item \url{https://www.tug.org/TUGboat/tb30-2/tb95moore.pdf}
+\end{enumerate}
+
+\subsection{General Remarks to create the pdf}
+Highest priority should always be the embedding of all fonts. Further compliance with the PDF/A standards is always desired, but talk to your supervisor in any case.
+
+Please also check the following resources if you have problems and need assistance
+
+\begin{enumerate}
+\item \url{https://spl29.univie.ac.at/fileadmin/user_upload/s_spl29/Studium/abschluss_master/Infoblatt_Hochschulschriften.pdf} 
+\item \url{https://e-theses.univie.ac.at/E-Theses_erstellen_von_pdf.pdf}
+\end{enumerate}
+
+\section{Further tips on the template}
+In the following chapters there are some general tips on the elements of Latex. You can check them out if you think they have useful information for you. Then you delete these chapters and replace them with the real chapters of your thesis.
+
+Also don't forget to register your Thesis at:
+\url{https://informatik.univie.ac.at/studium/hilfe-fuer-studierende/wegweiser-masterstudium/anmeldung-masterarbeit-themenfindung/}

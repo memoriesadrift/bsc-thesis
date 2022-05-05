@@ -1,0 +1,38 @@
+% --CHANGE THE TITLEPAGE HERE
+
+% title page provided in Word by the University which can be found here 
+% https://doktorat.univie.ac.at/doktoratsablauf/abschlussphase/einreichen-und-begutachtung/
+% Please pay attention to the guidelines that can be found there!
+% If you want you can always create the titlepage in Word and then add it with \includepdf{<filename>} from the pdfpages package to your thesis.
+%
+
+
+%Do not change or delete the following two lines
+\renewcommand{\TitleSetup}{DISSERTATION / DOCTORAL THESIS}
+\renewcommand{\TitleTitleSetup}{Titel der Disseratation / Title of the Doctoral Thesis\par}
+% Change the rest of the lines to fit you thesis
+
+
+% There are some commands also for multiple lines. If something exceeds more than a line use the multi line commands. In the worst case adjust the vertical spaces within the class.
+% -- Title Page
+\Title{I wish I had a Doctor's Degree} 
+% A title exceeding one line can be created using the \TitleTwo or \TitleThree command
+%\TitleTwo{I wish I \\ had a Doctor's Degree}
+%\TitleThree{I wish I \\ had a Doctor's \\ Degree}
+\Who{ FirstName LastName MSc} %Make sure you add all your titles! 
+% A name exceeding one line can be created using the \WhoTwo command
+%\WhoTwo{ FirstName \\ LastName MSc}
+\Degree{Doctor of Philosophy (PhD)}
+%\Degree{Doktorin ODER Doktor der >Zusatz< (Dr. >Abkürzung<)}
+%\Degree{Doktorin OR Doktor der >affix< (Dr. >abbr.<)}
+
+\Year{2019}
+\ProgrammeCode{A 786 880}
+\ProgrammeName{Doctoratsstudium Informatik} %Make sure it has the same Name as in the Studienblatt
+\Supervisor{Univ. Prof. My favorite professor, PhD}
+%\SupervisorTwo{Second Row} % Here you can change the row under the supervisor
+\CoSupervisor{0} %remove this line if there is a Co supervisor
+\CoSupervisor{Professor Co}
+\CoSupervisorTwo{Second Row} % Here you can change the row under the cosupervisor
+
+\Titlepage %This generates the titlepage
