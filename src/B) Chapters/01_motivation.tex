@@ -1,24 +1,63 @@
 \chapter{Motivation}
-\section{Introduction}
-\section{Main motivation behind the thesis}
-\section{Clearly say what the problem is and why other related techniques/tools don't solve it}
-\subsection{What is the problem of this work?}
-\subsection{Why do existing techniques/tools not solve it?}
-\section{Clearly state the goals of your work; discuss the metrics how you can measure success}
-Primary Goal:
-  Recreate a past malware attack and analyse its efficiency if it were used today
-Metrics:
+Ever since my first foray into the field of information security I have been fascinated by the ways in which
+different threats to an organisation's security arise. From the ways in which data can be obtained by rummaging
+through dumpsters where sensitive documents were dumped without being properly destroyed to sophisticated zero-day
+exploits used to distribute malware, the topic that particularly caught my interest was the way in which malicious
+payloads can be concealed in relatively mundane looking files.
+
+A perfect example of such file was a malicious Microsoft Word document created by the Lazarus Group \acrlong{APT}
+distributed to victims in South Korea via spear phishing. The malware itself was hidden within a \acrfull{BMP} file 
+that was itself concealed as a \acrfull{PNG} file. This malicious file was extracted to the victim's computer by 
+a macro in the macro-enabled Word document, which is also a very interesting part of the infection process. 
+
+This document piqued my interest for a multitude of reasons, chief among which was the interesting mechanism used
+to infect the victim's device, which used a quirk of the \acrshort{BMP} file format and a conversion function built into
+the \acrfull{VBA} programming language used to write macros that can be embedded in Word Documents. Using this 
+functionality allowed the malicious payload to be concealed under many layers of file formats while also keeping
+the extraction process quite simple, almost routine. The attack itself was also rather creative, using an interesting
+attack vector and custom toolchain typical for this threat actor.
+
+The problem with attacks like this is that since files are all simply a series of bytes in the end, with the
+interpretation being governed largely by how the operating system or program interacting with the file interprets 
+those underlying bytes. Due to how file formats are defined, some formats are more suitable for attacks than others
+and with the multitude of formats supported and used over the decades of computing, it is only inevitable that there
+would be a way to misuse some format in some way -- one of which being \acrshort{BMP} in this case. I believe it is 
+valuable to inspect this attack to shed light on how potential future attacks could be carried out. % TODO: Reword or sth
+
+Out of interest as well as scientific rigour I will attempt to recreate this malware, foregoing the malicious payload
+of course, and analyse its effectiveness. The main questions I will seek to answer are the following:
 \begin{itemize}
-  \item Functionality of the attack
-  \item Detection by antivirus software
-  \item Ease of detection by user
+  \item In what ways can a file hide malicious content?
+  \item How can a concealed malicious payload be extracted from a file and executed?
+  \item How do the previous questions come together to drop the RAT in the analysed document?
+  \item Can the analysed document be recreated? Does the exploit still work?
+  \item Does the analysed document avoid detection by antivirus software?
+  \item Are common systems still vulnerable?
 \end{itemize}
 
-\section{Briefly explain the process of your work and the methods you used}
-\begin{enumerate}
-  \item Analyse the past malware attack in question
-  \item Recreate the code behind the attack, engineering a similar file to the one used in the attack (with no malicious payload)
-  \item Test the attack in virtual machines emulating various operating systems
-\end{enumerate}
+Thus, the primary goal of this work will be to recreate the malicious Microsoft Word document along with the \acrshort{BMP}
+payload and secondary mocked \acrfull{EXE} payload without the actual \acrlong{RAT}. Recreating this malware should help
+verify the reproducibility of the original postmortem of the attack and its functionality as well as help gain further
+insight into how vulnerable current systems are to a similar attack, if at all. Furthermore, this analysis may yield
+advice other than the simple adage of not opening macro-enabled documents. Though, of course, this is always the best
+protection mechanism against malware using \acrshort{VBA} macros as their attack vector.
 
-\section{Crisply summarize your main contributions at the end of the motivation section}
+To achieve this goal we will create a facsimile of the malicious document as well as the payload it carried.
+This recreation will be based on the postmortem report of the attack written by Hossein Jazi. 
+The first part of the recreation will be a dummy \acrlong{EXE} containing a simple program that indicates the 
+system would have been compromised if the attack was real. This \acrshort{EXE} will then be hidden in the \acrshort{BMP}
+the same way as in the original attack and embedded in the macro-enabled Word document, analogous to the attack.
+Finally, we will be executing this faux-malicious document inside virtual machines running the Windows operating system
+and tracking how it executes in comparison to the original attack. 
+
+The metrics for measuring the success of this experiment will be rather simple -- recreating the attack in its full
+scale will be a full success, while failure after at least one part of the attack succeeds will be deemed a partial
+success. If the recreated attack is successful, we will further test its functionality on a range of virtual machines
+running the currently supported versions of the Windows operating system to see if the attack can be reproduced on all,
+or only some versions. We will also keep an eye out on when or whether antivirus software detects the payload.
+
+In summary, recreating this attack can lend insight into how file formats can be misused to carry malicious payloads and
+avoid detection while doing so. It also serves as an effort to validate the previous research done of this malware and
+make sure the results of that research are reproducible. Furthermore, the alternative setup using a facsimile of the
+malicious file may provide additional insight that had previously gone unnoticed.
+
