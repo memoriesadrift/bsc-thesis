@@ -113,6 +113,204 @@ part of it.
 \subsubsection{Compromised or Weak Credentials}
 
 \section{Current Threat Landscape}
+An overview of the current threat landscape is crucial to help us understand the role our analysed
+attack plays in the overall landscape.
+
+Cybersecurity threats have been on a continuing rise in recent years, both in size and scale 
+\cite{enisa_threat_landscape}. Remote work during the COVID-19 pandemic greatly increased
+the attack surface for malicious actors, as well as the time needed to detect intrusions 
+or system compromise, leading to the average cost of data breaches increasing across the
+board \cite{ibm_2020_cost_of_a_data_breach}. The role of remote work in security related 
+incidents was further highlighted as the pandemic moved into its later stages in 2021 as
+more companies returned to in-office work. In its 2021 "Cost of a Data Breach" report,
+IBM reported that security incidents were costlier for companies implementing remote work,
+with companies where over 50\% of the workforce worked remotely taking, on average, 58 days
+more to identify and contain breaches when compared to companies where less than 50\% of workers
+worked remotely \cite{ibm_2021_cost_of_a_data_breach}. This is in line with in the eponymous 
+report from 2020, where 70\% of questioned organisations that implemented remote work as a result of the 
+COVID-19 pandemic expecting the average cost of data breaches to increase \cite{ibm_2020_cost_of_a_data_breach}. 
+The rise in the cost of data breaches continued in the year 2021, rising by a further 10\% to an 
+average cost of \$4.24 million \cite{ibm_2021_cost_of_a_data_breach}.
+
+\subsection{Supply Chain Attacks} \label{sec:supply-chain-attacks}
+The biggest rising trend of 2021 have been \emph{supply chain attacks}, driven by the rising reliance of 
+companies on third party solutions for their IT needs \cite{enisa_threat_landscape, morphisec_threat_landscape}.
+The significance of these attacks has been so high, that the \acrfull{ENISA} created a separate threat
+landscape report specifically for this threat.
+Supply chain attacks are fundamentally comprised of two distinct attacks: the first on a supplier which the 
+attackers then use to conduct a second attack on a target which uses the services of the compromised supplier,
+be it a customer or another supplier \cite{enisa_supply_chain_threat_landscape}.
+
+While the attack vectors used to conduct the initial attack on the supplier are in line with expectations, 
+consisting of for example social engineering, brute force attacks or abuse of vulnerabilities in software
+or configurations used by the victim, the attack vector used to conduct the secondary attack is far more
+dangerous and highlights the true danger and severity of supply chain attacks.
+Because of the customer-supplier relationship between the two victims, there exists an inherent trust
+between the two parties that these types of attacks abuse. The danger comes through so-called Trusted Relationship
+attacks where a relationship of trust between two parties is compromised by an attacker and used to compromise
+the victim's security by using the trusted relationship as a means of lending themselves legitimacy.
+
+In the realms of software this can mean an attacker compromising a supplier's code repositories, infecting
+it with malware and then distributing it as an update to the supplier's customers. The customer is lulled into
+a false sense of security with the update, as it comes from the supplier, and it appears there is no cause for 
+concern. Attacking the supplier and gaining access to their systems can lead to various kinds of abuse 
+such as phishing, distributing malware, or impersonating the supplier's personnel \cite{enisa_supply_chain_threat_landscape}.
+
+The attack targets vary slightly between the two attacks, with the supplier attack being perpetrated not just 
+in order to conduct the second attack, but also for example to steal code, configurations or even hardware schematics.
+By far the most common target for supplier assets is code, with two thirds of the attacks studied by \acrshort{ENISA}
+between January 2020 and July 2021 aiming to compromise this asset \cite{enisa_supply_chain_threat_landscape}. 
+
+The attack on the customer carries similar traits with other cyberattacks, the main difference is in the increased 
+ease of infiltration dependent on the success of the first attack.
+Common targets are for example exfiltrating data, establishing botnets to carry out \acrfull{ddos} attacks or
+extorting money from the victim via ransomware. Data exfiltration was the most common between all the attacks
+covered in the \acrshort{ENISA} supply chain attack threat landscape with 58\% of attacks targeting this asset
+\cite{enisa_supply_chain_threat_landscape}. 
+
+%TODO: Possibly add a description of the SolarWinds attack to provide an example for this 
+
+\subsection{Ransomware}
+The term ransomware describes a category of malware threats used to digitally extort victims 
+by denying access to a device or files, unless a ransom sum is paid, usually in Bitcoin or other 
+cryptocurrencies \cite[p.~150]{ransomware_book}. Some ransomware attacks, like WannaCry, additionally 
+threaten to delete the victim's files unless the ransom is paid within a certain time limit to further
+intimidate victims into paying the ransom. The methods used to infect systems with ransomware are in line
+with other common cyberattacks, for example making use of social engineering or exploiting vulnerabilities
+\cite{nist_ransomware}.
+
+A worrying trend reported by \acrshort{ENISA} was the increase in use of zero-day vulnerabilities in the
+perpetration of ransomware schemes \cite{enisa_threat_landscape}. \emph{Zero-day attacks} are a class of
+attacks that exploit vulnerabilities that have not yet been publicly disclosed \cite{zero-day}. They give the 
+attacker a massive advantage as it's virtually impossible to defend against them because of their nature -- 
+antivirus software has no hash signature to recognise and the software's developers have no chance to patch the
+exploit since they aren't aware of it. These kinds of attacks were previously used mainly by \acrfull{APTs} 
+and nation-state threat actors, mainly due to their immense value as a free pass to
+any target they may wish to attack \cite{enisa_threat_landscape}. The fact that zero-day attacks are becoming more
+common in the ransomware sphere means that the high cost of using a zero-day vulnerability is worth it for the 
+attackers -- one is led to believe the payouts are high enough to justify it. 
+
+The profitability of ransomware is a large reason for its rise. It's a means of maximising the monetisation of 
+malware as attackers become increasingly motivated by financial gains \cite{ransomware-comprehensive, enisa_threat_landscape}.
+Some say we are observing a "golden age" of ransomware, as ransomware becomes more available to threat actors
+as \acrfull{raas} becomes more and more widespread and attackers target larger targets in search
+of higher payouts \cite{enisa_threat_landscape}. Additionally, amoral threat actors are increasingly targeting
+vital infrastructure and organisations that rely on access to their data to prevent death of patients
+or hold very important legal data, asking for exorbitant ransom fees which they hope the victims will pay in order
+not to be complicit in ,for example, the death of a patient \cite[p.~17-18]{morphisec_threat_landscape,
+ransomware-book}. %TODO: is this citation correct? p17-18 only apply to the ransomware-book reference
+High profile hacks and payouts continue to motivate these threat actors to try and replicate these successes and 
+get a large payout. 
+
+Another increasing trend in ransomware is the utilisation of multiple axes of attack. The result of these multiple
+threats has become known as \emph{double extortion ransomware} or even \emph{triple extortion ransomware}. A common
+double extortion ransomware attack consists of the encryption of the victim's data alongside its exfiltration,
+with the attacker demanding ransom be paid or their files would not only remain decrypted, but would also be leaked
+\cite{enisa_threat_landscape, unit42-ransomware}.
+
+As mentioned above, ransomware is distributed much the same as any other malware threat, which is why the developments
+in this area are relevant to our topic. Hiding a ransomware payload in a data file is virtually the same as hiding
+any other malware in the file. Thus, with ransomware on the rise, we can anticipate payloads of infected Microsoft
+Word or PDF documents to deliver ransomware instead of other malware types. In fact, this is already the case -- 
+malicious macro-enabled Word documents or exploited PDF files are already among the attack vectors used in ransomware
+delivery, often as a form of downloading, de-obfuscating or decrypting the code that takes control of the machine
+\cite[p.~8-10]{ransomware-book}.
+
+\subsubsection{Ransomware as a Service (RaaS)}
+As was mentioned in subsection \ref{sec:supply-chain-attacks}, companies are increasingly turning to external service providers 
+for their IT solutions and the same can be said for threat actors. Though distributing malware with the intent of
+letting other actors perpetrate attacks is not a new phenomenon, the \acrfull{raas} business model is surging in
+popularity in recent years. Conti and REvil, the two threat actors with the largest profits as well as infections in the ransomware 
+space, were both \acrshort{raas} providers, allowing their customers to easily orchestrate ransomware attacks
+\cite{enisa_threat_landscape, unit42-ransomware}.
+
+\acrshort{raas} also makes it much easier for inexperienced attackers or script kiddies to get access to ransomware
+and carry out attacks -- so long as they have the capital to purchase the ransomware from the dark web
+\cite{social-engineering-ransomware-vector}. Additionally, this points to malicious actors growing closer together
+as a community, allowing each to focus on their own area of expertise (malware creation, social engineering,
+vulnerability discovery, etc.) and sell expertly crafted solutions to other malicious actors for money or even 
+a share of the profits of an attack carried out using their tool \cite{enisa_threat_landscape}.
+Another shortcut attackers take that has been observed in 2022 by Unit 42 is the purchasing of access to a compromised 
+network directly from so-called \emph{initial access brokers} who provide the ransomware attackers with the ability to
+directly drop their ransomware into an already compromised network, saving time and money \cite{unit42-ransomware}.
+It is easy to see why this kind of relationship is particularly profitable for attackers perpetrating ransomware
+attacks. 
+
+Furthermore, \acrshort{raas} comes with an online dashboard for the command and control server, bulk mail spamming
+services, or even specialised social engineering teams that further amplify the effectiveness of the attack
+\cite{social-engineering-ransomware-vector}. These services, naturally, come at a cost. Some compensation methods
+for the \acrshort{raas} creators include a subscription based model, direct payment or a cut of profits
+\cite[p.~44-45]{enisa_threat_landscape, ransomware-book}.
+
+Attributing ransomware attacks to specific threat actors is also becoming more difficult due to this model,
+as when a certain strain of ransomware is known to, as an example, spread via e-mail in North America,
+if that same ransomware then starts spreading via malicious banner ads in Africa, linking the two is difficult
+for security researchers, as it is unclear if they belong to the same family of ransomware, or if they are 
+entirely different \cite[p.~47]{ransomware-book}. This hampers not only research into ransomware and how it
+spreads, but in some cases also recovery efforts. Knowing which strain of ransomware infected a network can
+in some cases even help avoid paying ransom altogether if the encryption algorithm used is known to be
+crackable.
+
+All these factors have contributed to the rise in ransomware cases, ransom amounts as well as groups
+perpetrating these attacks due to \acrshort{raas} lowering the barrier to entry \cite{unit42-ransomware}.
+Because of this, we can expect the amount of ransomware groups to continue to rise in the future. Since ransomware
+is an increasingly popular attack type, the ability to hide it in infected data files is crucial, or in other words:
+being able to understand how ransomware can be hidden within data files is becoming increasingly important.
+
+\subsubsection{Multiple Extortion Ransomware}
+Another trend mentioned in passing in subsection \ref{sec:supply-chain-attacks} is the increase in cases where
+threat actors choose to pressure the victim on multiple fronts, often two, with three becoming an important
+number as well. Double extortion was first observed in late 2019, but is noted to have exploded in popularity
+by 2022 with the primary secondary extortion tactic being data exfiltration with the motive of threatening victims
+into paying quicker, or demanding additional funds \cite{unit42-ransomware, multiple-extortion-ransomware}. 
+
+This data exfiltration trend arose out of a decreased number of organisations willing to pay ransom due to strong
+backups -- due to easy backup solutions like cloud backups more and more companies were able to recover from serious
+ransomware attacks by simply resetting their machine to a clean state and restoring a backup, hampering the attackers'
+ability to secure the ransom payment \cite{multiple-extortion-ransomware}. Attackers often threaten to publish
+the data on the dark web to name and shame the victims into paying the ransom, because even if the 
+organisation can recover its data using a back up, the threat of a data leak is much more difficult to stop internally.
+
+An example of a threat actor that perpetrates these kinds of attacks is the Conti threat group. 
+The group has been at the forefront of ransomware attacks observed by Unit 42 and has leveraged double extortion
+attacks to demand high average ransom payments of \$1.78 million in 2021 and leaking data of over 600 organisations,
+including vital infrastructure such as hospitals or law enforcement agencies \cite{unit42-ransomware}.
+It is clear that Conti are ruthless attackers, stopping at nothing to secure profits.
+
+Even though double extortion ransomware is still in its infancy, attackers are already innovating on the concept
+of using multiple angles of extorting their victims. The term \emph{triple extortion ransomware} was coined mainly
+in relation to a ransomware attack on Finnish mental health care provider Vastaamo. The attackers targeted the clinic 
+and demanded ransom for decryption of patient data, which they also exfiltrated as part of a double extortion scheme
+\cite{kshteri-ransomware}.
+However, what set apart this case was that the attackers then additionally extorted the patients, the victim's
+customers, by demanding smaller sums of money from them directly, threatening to leak their therapists' 
+session notes \cite{vastaamo}.
+Ultimately, the company buckled under the heavy financial losses and the data breach and declared bankruptcy,
+ceasing operations completely \cite{vastaamo, kshteri-ransomware}.
+
+Attacks like the ones described above have been given the name \emph{multiple extortion ransomware} by Payne and
+Mienie to ransomware that allows the attacker multiple opportunities for extorting payments from their victims.
+\cite{multiple-extortion-ransomware}.
+Payne and Mienie further suggest that the evolution of multiple extortion attacks is an important and ongoing
+development in the current threat landscape:
+\begin{quote}
+  There are many ways in which these kinds of multiple-extortion attacks may already be developing organically,
+  with or without forethought. First, third parties who purchase or download a victim's sensitive files may pursue
+  additional attempts to blackmail or otherwise extort money from the victim directly using the same information.
+  Second, criminals may leverage customer, client, patient or employee data from leaked files to harass,
+  intimidate, or extort money from those individuals. Third, and possibly most concerning of all, while an individual
+  or organization might not be a valuable or high-profile target at the present time, the negligible cost of storing
+  stolen data could mean that many years in the future, the sensitive information of a potential world leader or
+  prominent businessperson could be used to blackmail or extort years or possibly decades after an initial attack.
+  \cite{multiple-extortion-ransomware} %TODO: Is it okay to change a spelling to the BrE spelling in a citation?
+\end{quote}
+We've already been able to see some of their thoughts become reality during the Vastaamo attack, where the second
+development cited can be observed with attackers extorting the victim's customers.
+
+\subsection{Cryptojacking}
+\subsection{State-sponsored Threat Actors}
+
+
 \section{File Format Security}
 \subsection{What Is a File}
 \subsection{Hiding Extra Content in Files}
