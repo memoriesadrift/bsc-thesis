@@ -1,4 +1,112 @@
 \chapter{Related Work}
+% TODO: Write a short introduction
+\section{What Is Malware?}
+Though defining malware might seem as a simple task, formally defining it has been a difficult open problem in 
+computer virology for a long time; the precise reasoning for this stems from the fact that each algorithm or
+piece of software can be expressed logically and has certain \emph{intended behaviour}, which often isn't
+properly defined \cite{malware-definition}. Kramer and Bradfield posit a logical definition of malware which
+we won't fully dedicate ourselves to, but their introduction to the concept without the use of logical language
+is worth mentioning. They posit malware as software that causes the actual behaviour of some other software
+to differ from its intended behaviour, where this difference stems from an incorrectness in verification or
+validation of program behaviour, leading to a defining characteristic of malware being the \emph{causation of incorrectness}
+\cite{malware-definition}. 
+
+Moving from this more formal definition to a more informal one, Skoudis defines malware as "[...]a set of instructions that 
+run on your computer and make your system do something that an attacker wants it to do \cite{malware-book}". For our
+intents and purposes this definition is sufficient, and we will further broaden it to our working definition:
+\begin{quote}
+  Malware is software maliciously designed to do whatever its author wants, unconstrained by legality, consent or
+  permission.
+\end{quote}
+
+\subsection{Motivation}
+Malicious actors can act in a multitude of ways, with motivations behind their actions grouped into a few overarching
+categories. While different classifications exist, we will be basing ours on a classification by Brewster et al.
+
+
+We will cover different reasons for why actors might act maliciously, but sometimes the creation of malware doesn't have
+to be malicious at all. Malware can also be created to showcase a vulnerability and call attention to it, so that the 
+security of the system  under attack can be improved without causing any actual damage. These kinds of actors are 
+called \emph{white hat hackers} \cite{white-hat-hacking-definition}.
+
+
+\subsubsection{Ideological}
+Attackers motivated by ideology fall into this category. In the taxonomy by Brewster et al. this encompasses the
+\emph{political, ideological and informational / promotional} categories, wherein the actors act based on a political
+agenda (such as espionage, sabotage or political protest), a held belief (such as the belief in freedom of information)
+that views hacking into systems as a necessary act, or the desire to disseminate information and increase public
+awareness \cite{brewster-malware-motivation}.
+
+A famous example of a political attack is the Stuxnet worm that targeted Iranian nuclear facilities in the year
+2010 \cite{brewster-malware-motivation}. Stuxnet is reported to have been perpetrated by the US and Israeli governments,
+though unconfirmed. %TODO: Cite (Beaumont and Hopkins, 2012).
+An interesting facet of the Stuxnet worm was the fact that it spread through systems without causing any damage until it
+arrived at its designated targets, where it activated to sabotage the target systems. %TODO: cite
+
+While ideological actors in the taxonomy by Brewster et al. are similar to political attackers, they can be
+distinguished because the beliefs they hold are personal, such as a protest against something they oppose or their 
+religion \cite{brewster-malware-motivation}. Informational / promotional actors are, in our opinion, very similar to
+these kinds of actors, with a famous example being Edward Snowden. Snowden is wanted by US authorities on charges of
+espionage after stealing and subsequently leaking thousands of documents pertaining to government espionage against its
+own citizens \cite{snowden}.
+
+\subsubsection{Commercial}
+Attackers that pursue some sort of financial, commercial or economic gain fall into this category. Brewster et al.
+distinguish between \emph{financially motivated} actors and \emph{commercially motivated} actors, with the main
+distinction being that the financially motivated actors act to gain more directly, while the commercial actors might
+act out of additional reasons such as economic or industrial espionage or theft of company secrets or intellectual
+property \cite{brewster-malware-motivation}.
+We believe these motivations to be sufficiently similar to allow them to be grouped under one umbrella term.
+
+\subsubsection{Personal}
+The final category we observe joins together the remaining categories in the studied taxonomy, encompassing motivations
+that are directly related to a person's own life. These are distinct from the ideologically motivated actors, as their
+actions aren't necessarily driven by ideology, but more so by emotion or way of life. This category encompasses actors
+that act emotionally, such as out of anger, boredom or who seek revenge, actors that hack because they find it fun or
+challenging, or want validation from peers, or even actors that resort to hacking due to how they choose to live their
+life, such as trolls hacking as a means of causing emotional distress to their targets
+\cite{malware-motivation-classification, brewster-malware-motivation}.
+
+\subsection{Types of Malware}
+Malware comes in many shapes in sizes that have some characteristics in common, while differing on others. The most
+basic part that all malware has in common is the \emph{payload}, or what the malware is supposed to do 
+\cite[p.~12]{aycock-book}. This could be anything, but it is often understood to mean the malicious activity that 
+the malware performs. Another property we consider all malware to have in common is an \emph{attack vector} or how
+the malware gains access to the victim's system. We will cover attack vectors separately, but some examples include
+social engineering, phishing, drive-by attacks, droppers or abuse of a vulnerability.
+
+Where malware begins to differ are the other properties -- Aycock posits a taxonomy based on the following three 
+characteristics, with each type of malware being classified on a scale roughly akin to "yes, no, maybe"
+for each property.
+\begin{quote}
+  \begin{enumerate}
+    \item \emph{Self-replicating} malware actively attempts to propagate by creating new copies, or instances, 
+      of itself. Malware may also be propagated passively, by a user copying it accidentally, for example, 
+      but this isn't self-replication.
+    \item The \emph{population growth} of malware describes the overall change in the number of malware instances due to
+      self-replication. Malware that doesn't self-replicate will always have a zero population growth, but malware with a
+      zero population growth may self-replicate.
+    \item \emph{Parasitic} malware requires some other executable code in order to exist. "Executable" in this context 
+      should be taken very broadly to include anything that can be executed, such as boot block code on a disk, binary 
+      code in applications, and interpreted code. It also includes source code, like application scripting languages,
+      and code that may require compilation before being executed.
+  \end{enumerate}
+  \cite[p.~11-12]{aycock-book}
+\end{quote}
+Where these three characteristics are not sufficient to differentiate two types of malware, additional clarification can
+be provided to distinguish the two; for example while \emph{spyware} and \emph{adware} both are not self-replicating,
+have no population growth and are not parasitic, their payloads differ -- where spyware collects information for
+exfiltration, adware often uses collected information for advertising purposes, spamming the user with advertisements
+or exfiltrating information to gain a competitive edge \cite[p.~16-17]{aycock-book}. 
+
+\subsubsection{Viruses}
+\subsubsection{Worms}
+\subsubsection{Trojan Horses}
+\subsubsection{Ransomware}
+Ransomware will be discussed in depth in a further section discussing the current threat landscape, as it is an integral
+part of it.
+
+\subsection{Concealing Malware}
 
 Background
 \begin{enumerate}
