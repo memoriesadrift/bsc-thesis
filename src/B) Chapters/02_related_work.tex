@@ -12,7 +12,7 @@ validation of program behaviour, leading to a defining characteristic of malware
 \cite{malware-definition}. 
 
 Moving from this more formal definition to a more informal one, Skoudis defines malware as "[...]a set of instructions that 
-run on your computer and make your system do something that an attacker wants it to do \cite{malware-book}". For our
+run on your computer and make your system do something that an attacker wants it to do \cite{skoudis-book}". For our
 intents and purposes this definition is sufficient, and we will further broaden it to our working definition:
 \begin{quote}
   Malware is software maliciously designed to do whatever its author wants, unconstrained by legality, consent or
@@ -22,10 +22,8 @@ intents and purposes this definition is sufficient, and we will further broaden 
 \subsection{Motivation}
 Malicious actors can act in a multitude of ways, with motivations behind their actions grouped into a few overarching
 categories. While different classifications exist, we will be basing ours on a classification by Brewster et al.
-
-
-We will cover different reasons for why actors might act maliciously, but sometimes the creation of malware doesn't have
-to be malicious at all. Malware can also be created to showcase a vulnerability and call attention to it, so that the 
+While there are many reasons for malware authors to act maliciously, the creation of malware doesn't always have
+to be malicious. Malware can also be created to showcase a vulnerability and call attention to it, so that the 
 security of the system  under attack can be improved without causing any actual damage. These kinds of actors are 
 called \emph{white hat hackers} \cite{white-hat-hacking-definition}.
 
@@ -100,8 +98,123 @@ exfiltration, adware often uses collected information for advertising purposes, 
 or exfiltrating information to gain a competitive edge \cite[p.~16-17]{aycock-book}. 
 
 \subsubsection{Viruses}
-\subsubsection{Worms}
+Throughout our research, we have repeatedly come across a definition by Cohen, one of the first 
+people to conduct research into computer viruses, which goes as follows: "A virus is a program that can ‘infect’ other 
+programs by modifying them to include a, possibly evolved, version of itself \cite{cohen-virus-course}." The term
+\emph{infect} is understood to mean the modification of the target program to include a copy of the virus as explained
+in the remainder of the definition. 
+
+Describing viruses using the three metrics outlined by Aycock, we consider viruses to self-replicate, have a positive 
+population growth and be parasitic \cite[p.~14]{aycock-book}. Though viruses spread across the infected system 
+(leading to the positive population growth), they notably don't spread through networks, which is the domain of worms, 
+covered in the following section \cite[p.~15]{aycock-book}.
+
+Viruses are generally noted to be structured in three distinct parts: 
+\begin{itemize}
+  \item the \emph{infection vector} -- how the virus spreads across a system. It doesn't necessarily have to be unique,
+    leading to \emph{multipartite} viruses, 
+  \item the \emph{trigger}, which is how the virus decides when the payload should be delivered,
+  \item and finally the \emph{payload} which is what the virus does, other than just replicate throughout the infected
+    system. Usually, the payload intends to cause some sort of damage, or even act as the start of another attack, such
+    as the virus payload intending to open a back door to the system, allowing the attacker to access the system and use
+    it as part of a botnet.
+\end{itemize}
+\cite[p.~7, p.~27]{viruses-revealed-book,aycock-book} %TODO: Is this citation style correct? 
+
+Viruses, as described, infect files in order to spread and eventually drop their payload. There are numerous ways this
+infection can take place: The file itself can be modified by the virus to contain a copy of the virus in a process known
+as overwriting or insertion, the file can be replaced by a copy of the virus file that redirects the user to the
+correct file after doing whatever it pleases after the user attempts to open the file (think of it as a more malicious 
+shortcut) in what is called a companion virus, or, most importantly for the topic of this work, the virus can be
+embedded in the macro section of a document format that supports macros, for example Microsoft Word \cite{aycock-book,
+skoudis-book}. 
+
+Macros are a simple tool that was originally intended to increase the productivity of users using word
+processors such as Microsoft Word. Using macros allows the user to run arbitrary code at will, for example when the
+document is opened, which is easy to weaponise for malicious use. Though the user is often given a warning about the
+presence of macros in a document and given the option to run them, these warnings can be easily ignored, or worse, the
+user can be deceived into allowing macros to be executed by an attacker.
+
+The payload of a virus can be arbitrary, from having no payload at all and simply infecting more and more files, to
+payloads that randomly delete files, clog up memory, create logic bombs or even back doors to the infected system 
+\cite{viruses-revealed-book, skoudis-book, cohen-virus-course}. 
+
+\subsubsection{Worms} \label{subsec:worms}
+Since viruses spread through files on a system, they are naturally limited in their spread by human interaction
+\cite{aycock-book}. In the early days of computing and computer viruses, it was common for users to move floppy
+disks between systems, which allowed an easier spread for the virus, since there was a high rate of mobility of physical
+disks between computers \cite{cohen-virus-course}. 
+
+Spreading through networks instead of just the local file system is a rather important trait, which is why malware capable of
+spreading throughout networks was given a new name: \emph{worm}. Worms share many characteristics with viruses -- on
+Aycock's taxonomy they share two properties: they both self-replicate and they both have a positive population growth,
+but differ in parasiticalness; worms forego being parasitic \cite[p.~15]{aycock-book}. Worms are standalone entities and
+don't infect other files or rely on other executables; they can be thought of as infecting the machine itself \cite{
+aycock-book, viruses-revealed-book}.
+
+The main draw to worms from a malware author's perspective is the fact that worms often spread at a very rapid pace,
+since they don't have to rely on humans in order to propagate \cite{aycock-book, skoudis-book, viruses-revealed-book}.
+Though their speed is one draw, their reach is a non-negotiable second -- since they aren't constrained to being passed
+around through physical media, they can reach virtually any device in the world, especially in today's interconnected
+society \cite{skoudis-book, aycock-book}. This allows attacks to scale well and quickly infect a large amount of systems,
+which can, depending on the payload, have potentially devastating consequences.
+
+Another upside is that attacks conducted with worms have the potential to be very difficult to attribute to a particular
+attacker, since the worm rapidly spreads throughout the internet, one victim's computer may be infected by the worm from
+an IP address located in Ghana, while the next victim might be infected from a Swiss IP, making attribution, persecution
+as well as countermeasure development more difficult \cite{skoudis-book}.
+
+Worms are structured similarly to viruses, with a few minor differences. Skoudis proposes a model shaped like a missile,
+wherein a worm is described as having a warhead which serves to penetrate the attacked system, a propagation engine,
+scanning engine and target selection algorithm to facilitate the propagation of the worm to appropriately chosen and
+vulnerable victims, and finally a payload to be dropped on infected devices to compromise the system or otherwise cause
+damage to the victim \cite{skoudis-book}.
+
+There are various ways in which a worm can propagate across a network, often being given a name based on the spread 
+mechanism, e.g. \emph{email worm}. Because worms are standalone programs and don't rely on any particular files they can
+spread through networks through ways that viruses don't, for example by using buffer overflows or underruns to leech
+onto open network connections or can even send malicious emails or messages using other messaging clients with infected 
+attachments to a victim's contacts \cite{skoudis-book, aycock-book}.
+
+A particularly destructive use of worms is the creation of \emph{botnets}, large distributed networks of computers that
+an attacker has established a back door in and compromised to do their bidding. These botnets can then be weaponised to
+launch \acrfull{ddos} attacks with overwhelming force \cite{skoudis-book}. Worms are the perfect tool to create these
+compromised networks as they spread rapidly across the world and can quickly find new victims and vulnerable machines
+while making the resulting attack harder to trace and more powerful \cite{skoudis-book}.
+
 \subsubsection{Trojan Horses}
+The name of this malware threat comes from the epic poem \emph{Aeneid} by Virgil, which describes the final siege of the 
+war between the Greeks and the Trojans. The Greeks built a large wooden horse and hid a small part of their army inside
+it, then pretended to leave. The Trojans thought the horse was left as a gift and dragged it into the city. Unbeknownst
+to them, the horse was full of enemy soldiers that sneaked out of the horse under the cover of the night and opened the
+city gates from the inside for the attacking Greek army, ending the war then and there.
+
+Similarly to the horse the Greeks constructed in the Trojan war, \emph{trojan horses} are malicious programs that
+claim to be executing some mundane, harmless task (and they may or may not actually be doing that), while secretly 
+executing some malicious task in the background, such as keylogging, or establishing a back door to the victim's system 
+\cite[p.~12-13]{viruses-revealed-book, aycock-book}. 
+What differentiates them from viruses and worms is that they don't self-replicate and thus don't have a population growth, 
+but can be thought of as parasitic, as they perform tasks other programs might, while being malicious in the background 
+\cite[p.~12]{aycock-book}. 
+
+In the modern world, the lines between the three blur, however. Crucially, \emph{multipartite} malware relies on the
+user launching an application they think will perform some mundane action (as a trojan would) in order to install a
+self-replicating worm or virus and trigger the mechanism used to pass it on further \cite{viruses-revealed-book}. This
+is just one of many complexities in categorising malware, which we will gloss over for the sake of brevity.
+
+Just like for any other types of malware, a payload is important for the trojan to do any real damage. An important type
+of payload often carried by trojans is a backdoor, leading to a so-called \acrfull{rat}, also called Remote Access Trojan 
+\cite{viruses-revealed-book}. \acrshort{rat}s allow an attacker (or user of the \acrshort{rat}) to submit commands to
+the victim (target) computer, copy files to and from it, making the machine a tool at the attacker's disposal
+\cite{viruses-revealed-book}. The language of the previous sentence is purposefully vague on whether an attacker
+is acting maliciously, as remote control (or remote access) software plays a legitimate role in computing -- we often
+want to access a device remotely to work or copy files, such as by using \verb+ssh+.
+
+\acrshort{rat}s are a particularly important threat when misused, as they grant an attacker full control over the
+victim's computer, turning the victim's device into a \emph{zombie}, potentially being able to use it to fuel
+\acrshort{ddos} attacks, as described in the \nameref{subsec:worms} subsection.
+
+
 \subsubsection{Ransomware}
 Ransomware will be discussed in depth in a further section discussing the current threat landscape, as it is an integral
 part of it.
