@@ -221,9 +221,36 @@ part of it.
 
 \subsection{Concealing Malware}
 
-\subsection{Social Engineering and Phishing}
-\subsubsection{Insider Threat}
-\subsubsection{Compromised or Weak Credentials}
+\section{Social Engineering and Phishing}
+One of the most common infiltration vectors used by malicious actors is social engineering, 
+where the victim is led to perform certain actions, divulge information or grant access to a 
+system based on psychological manipulation \cite{advanced-social-engineering-attacks, covid19-social-engineering}. 
+Social engineering continues to be among the top threats to companies in 2021, preying on the human
+factor and momentary lapses in judgement by individual workers to attack even the most secure of systems
+\cite{verizon_2021}. 
+The efficiency of these attacks is not hampered by the technical security of a system,
+since the people using the system are the weakest link in its security \cite{advanced-social-engineering-attacks,
+social-engineering-attacks}.
+
+Though social engineering encompasses a multitude of different types of attacks ranging from physical to
+computer-assisted, we will be focusing on the computer-assisted side of social engineering, namely phishing. %TODO: why only?
+Phishing is a sociotechnical social engineering attack usually perpetrated through email or instant messaging 
+against a large amount of targets in the hopes of the attack being successful against enough targets to be 
+profitable \cite{advanced-social-engineering-attacks}. 
+Phishing carries an analogy to fishing -- messages sent to potential victims are analogous to the line 
+of a fishing rod, with the message contents serving as the bait. 
+The recipient of the phishing message is led to believe they must take an action outlined in the message,
+usually clicking a link or downloading an attachment, which will lead to the malicious actor stealing
+personal information from the victim or infecting the device with malware \cite{state-of-phishing}.
+Forging convincing looking emails, websites or business documents is much easier than perpetrating a similar 
+scheme in real life by, say, opening a fake brick-and-mortar business.
+\begin{quote}
+  We’ve evolved social and psychological tools over millions of years to help
+  us deal with deception in face-to-face contexts, but these are little use to us
+  when we’re presented with an email that asks us to do something. \cite{anderson-security-engineering}
+\end{quote}
+While we don't concern ourselves with phishing directly, it is the most common attack vector used to deliver
+infected files like the one we study in this thesis.  % TODO: should I address the thesis like this? 
 
 \section{Current Threat Landscape}
 An overview of the current threat landscape is crucial to help us understand the role our analysed
