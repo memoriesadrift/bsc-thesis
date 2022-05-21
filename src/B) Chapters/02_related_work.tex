@@ -254,7 +254,9 @@ infected files like the one we study in this thesis.  % TODO: should I address t
 
 \section{Current Threat Landscape}
 An overview of the current threat landscape is crucial to help us understand the role our analysed
-attack plays in the overall landscape.
+attack plays in the overall landscape. Most notably, since infected document files continue to play 
+a major role in malware attacks, it's important to understand the currently rising risks that such
+files might pose for us, the leading among them being ransomware at this time \cite{enisa_threat_landscape}.
 
 Cybersecurity threats have been on a continuing rise in recent years, both in size and scale 
 \cite{enisa_threat_landscape}. Remote work during the COVID-19 pandemic greatly increased
@@ -447,18 +449,130 @@ development in the current threat landscape:
 We've already been able to see some of their thoughts become reality during the Vastaamo attack, where the second
 development cited can be observed with attackers extorting the victim's customers.
 
-\subsection{Cryptojacking}
 \subsection{State-sponsored Threat Actors}
 
-
 \section{File Format Security}
-\subsection{What Is a File}
-\subsection{Hiding Extra Content in Files}
-\subsubsection{File Format Hacking}
-\subsection{Example: Bitmap Image Files}
+Files are a fundamental building block of computing, primarily used to store data and index it by a file name.
+Different types of files serve different purposes, such as storing images, text, code, or even process 
+information (stored in virtual files) on UNIX based computer systems.
+
+A more thorough definition of what a file is, as defined by Silberschatz et al. is as follows:
+\begin{quote}
+  A file is a named collection of related information that is recorded on secondary storage. From a user's perspective, 
+  a file is the smallest allotment of logical secondary storage; that is, data cannot be written to secondary storage 
+  unless they are within a file \cite[p.~422]{operating-system-concepts}.
+\end{quote}
+
+Silberschatz et al. also appropriately note that the concept of a file is purposefully extremely general, as files can
+hold arbitrary data in forms such as alphabetic, numeric or binary; the data can be structured freely like in the case
+of text files, or rigidly structured, such as with \acrfull{PNG} files \cite[p.~422]{operating-system-concepts}.
+
+Files themselves are outwardly characterised by a \emph{file name} and \emph{file extension} with the name used to 
+identify the file to the user, while the extension is normally used to indicate what the contents of the file may be
+\cite[p~.427]{operating-system-concepts}. Files can also contain other data about the file itself, such as a unique
+identifier for the file system, information about the file's size, access control information or a timestamp of the
+last modification of the file \cite[p.~422]{operating-system-concepts}.
+
+The file extension can also help the user decide what program to use to work with the file in question. 
+For example, opening a binary file in a text editor such as \verb+vim+ or \verb+gedit+ will display a garbled mess of
+characters, whereas using a specialised program for work with binaries, such as \verb+Ghidra+ will allow the user to
+properly work with the file.
+
+Most commonly, files are stored on the disk as a simple array of bytes (in UNIX based systems, for example), with the file 
+extension providing hints on how these bytes are to be interpreted, while the operating system often makes no
+assumptions as to how these bytes are to be interpreted \cite[p.~428]{operating-system-concepts}. Ultimately, this 
+extension can be arbitrary and if, say, a plain text file (\verb+.txt+) would have its extension changed to \verb+.hjkl+ 
+the contents of the file would remain unchanged. 
+
+If we used a text editor to open this file it would read the contents correctly, regardless
+of the nonsensical extension name. Similarly, changing the extension back to the original \verb+.txt+ would restore every 
+sense of normalcy about the file we would expect -- file extension changes made arbitrarily by the user without the use of 
+some conversion algorithm will have no effect on the contents of the file itself. 
+
+Notably, however, it's common for operating systems to only allow certain types of operations on certain file types 
+(often based on the extension of the file) -- as an example MS-DOS based systems only allow executing files with the 
+\verb+.com+, \verb+.exe+ and \verb+.bat+ file extensions, with  \verb+.com+ and \verb+.exe+ being executable files, 
+while \verb+.bat+ is a batch file containing commands for the operating system to execute, in ASCII 
+\cite[p.~427]{operating-system-concepts}.
+
+\subsection{File Formats}
+
+% TODO: Sources for next paragraph
+Though file extensions serve as an indicator to the user, the computer has to know how to parse the raw byte contents of
+the file, which is what file format specifications are for. File formats are standards used to encode data into binary 
+to be stored in files, as well as to decode it for future use. 
+
+There are many ways in which file formats can be misused to hide malicious content (or intent) from the user, however,
+there is also one very simple and quite common way in which file \emph{extensions} can be used to lull the victim into a
+false sense of security. The ILOVEYOU virus that circulated in the year 2000 consisted of an email pretending to have a
+love letter attached, with the file \verb+LOVE-LETTER-FOR-YOU.TXT.vbs+ attached \cite{viruses-revealed-book}. 
+
+It should be immediately obvious to the reader that this file is not a text file, but instead a \acrfull{vbs} file. When
+this file is executed it launches the virus, since the file is a script that can be run on Windows machines
+and not a text file as it's masquerading to be. The vulnerability at play, so to speak, is the ability to hide file name 
+extensions from being displayed in the GUI of the operating system. In this case, the attackers further tried to mask
+the real file extension by displaying the fake extension in upper case letters, relegating the real file extension to
+lower case in an attempt to make it evade the victim's eye.
+
+While the above case preyed on the victim not paying attention to the file name extension, there are also ways in which
+files can be made to contain content the user would not expect them to. The process of hiding a file inside another
+file falls within the definition of steganography, which traditionally concerns itself with hiding messages within other
+messages \cite{steganography}.
+
+Using steganography, we can hide arbitrary data within image files, or even audio files, to be retrieved at a later
+point by some specialised decoder. A very common method of hiding data within images, mainly concerning the \acrfull{BMP},
+\acrfull{GIF} and \acrfull{JPEG} image formats, is hiding the message within the least significant bit of each byte of the image file
+\cite{steganography}. By definition, the least significant bit contributes very little to the byte in question, leading
+to changes to the least significant bit being difficult if not impossible for the human eye to see \cite{steganography}.
+
+Additionally, it stands to reason that since each bit can only have one or two values, the chance that a bit of our file 
+and the least significant bit of the byte we are hiding our bit in are identical is 50\%, so we can expect to have to
+change only roughly every other bit when hiding our data. This makes the task of recognising a file as a carrier of a
+message hidden by steganographic means even more difficult.
+
+It's also possible to use the file format specifications in creative ways to craft valid files that have some admittedly
+strange properties. File format specifications let the program that implements them know how to parse 
+a file in the given format, often by indicating what the file is somewhere in the beginning (or close to the beginning)
+of the file in a region known as the file header. This file header should appear at the start of the file, but
+sometimes, this isn't enforced by specific vendors that chose to implement the standard. 
+
+Such is the case of the Adobe Acrobat Reader which relaxes the criteria for the \acrfull{PDF} file header to not be
+required at the start of the file, but instead within the first 1024 bytes of the file \cite{adobe-acrobat-pdf}. 
+While this is a deviation from the standard, it has become widespread among other programs and implementations too, 
+due to the dominance of Adobe within the market and can lead to space in the file being able to be used for other 
+intents and purposes.
+
+Generally speaking, file formats that don't require the header of the format to be located at offset 0, right at the
+very beginning of the file are troublesome from the point of view of being able to conceal data, but even more 
+troublesome are formats that use a \emph{terminator} character or sequence to signal to the program reading the file 
+that the contents of the file are over, even though there may theoretically be further bytes of data following the 
+terminator.
+
+\subsubsection{\acrfull{PNG} File Format}
+
+One notable file format specification that uses a terminator to signal the end of usable data is the \acrfull{PNG}.
+The \acrshort{PNG} file format is a thoroughly defined format for storing raster images in a well-compressed, portable
+and lossless manner, meant as a replacement for the proprietary, patented \acrfull{GIF} file format \cite{png-standard}.
+It's widely used alongside \acrshort{JPEG} for storing image files, boasting an overall higher quality to the
+\acrshort{JPEG} format, which uses a lossy compression algorithm to store data. % TODO: Cite?
+
+The \acrshort{PNG} file format specifies that each valid \acrshort{PNG} file must end with the four byte sequence 
+\verb+73 69 78 68+, also called \verb+IEND+ in the specification, which signifies the end of the PNG data stream 
+\cite{png-standard}. The use of this terminator means that programs responsible for reading these \acrshort{PNG}s 
+will \emph{ignore} all data that comes after this \verb+IEND+ terminator sequence, as they rightfully think the
+\acrshort{PNG} data stream has ended, allowing us to use the remaining bytes of the file to store further,
+arbitrary data. 
+
+Of course, the intention behind this terminator is clear to us, it was meant to be the end of the file and when it comes
+to regular \acrshort{PNG} files it is. However, due to the arbitrary nature of files, nothing is stopping us from 
+appending more bytes of data to the end of this \acrshort{PNG} file.
+
+This is the exact trick that was used by the Lazarus \acrshort{APT} group in the malicious document that we analyse to
+smuggle a malicious payload disguised as a simple \acrshort{PNG} image embedded in a Word document \cite{jazi-article}.
 
 \section{Microsoft Word Documents}
-\subsection{History of the File Format}
+
+\subsection{History of the Word Document File Format}
 \subsubsection{.doc}
 \subsubsection{.docx}
 \subsection{Macros and Scripting}
@@ -509,4 +623,7 @@ Background
       \item Actor Profile -- Lazarus
       \item WannaCry?
     \end{itemize}
+
+
+
 \end{enumerate}
