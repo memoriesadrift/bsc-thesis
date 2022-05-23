@@ -1,0 +1,5 @@
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Release\netcoreapp3.1\publish\Payload.exe
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Release\netcoreapp3.1\publish\Payload.dll
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Release\netcoreapp3.1\publish\Payload.deps.json
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Release\netcoreapp3.1\publish\Payload.runtimeconfig.json
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Release\netcoreapp3.1\publish\Payload.pdb

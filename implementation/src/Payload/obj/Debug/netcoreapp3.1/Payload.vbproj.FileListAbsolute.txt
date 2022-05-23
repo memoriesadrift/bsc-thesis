@@ -1,0 +1,16 @@
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.vbproj.AssemblyReference.cache
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\WinFormsApp1.Payload.resources
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.vbproj.GenerateResource.cache
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.AssemblyInfoInputs.cache
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.AssemblyInfo.vb
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.vbproj.CoreCompileInputs.cache
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Debug\netcoreapp3.1\Payload.exe
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Debug\netcoreapp3.1\Payload.deps.json
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Debug\netcoreapp3.1\Payload.runtimeconfig.json
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Debug\netcoreapp3.1\Payload.runtimeconfig.dev.json
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Debug\netcoreapp3.1\Payload.dll
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\bin\Debug\netcoreapp3.1\Payload.pdb
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.dll
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.pdb
+C:\Users\SAMO\Desktop\UNI\bsc-thesis\implementation\src\Payload\obj\Debug\netcoreapp3.1\Payload.genruntimeconfig.cache

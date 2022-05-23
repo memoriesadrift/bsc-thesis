@@ -1,0 +1,16 @@
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.vbproj.AssemblyReference.cache
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.Form1.resources
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.vbproj.GenerateResource.cache
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.AssemblyInfoInputs.cache
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.AssemblyInfo.vb
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.vbproj.CoreCompileInputs.cache
+C:\Users\SAMO\source\repos\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.exe
+C:\Users\SAMO\source\repos\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.deps.json
+C:\Users\SAMO\source\repos\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.runtimeconfig.json
+C:\Users\SAMO\source\repos\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.runtimeconfig.dev.json
+C:\Users\SAMO\source\repos\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.dll
+C:\Users\SAMO\source\repos\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.pdb
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.dll
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.pdb
+C:\Users\SAMO\source\repos\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.genruntimeconfig.cache

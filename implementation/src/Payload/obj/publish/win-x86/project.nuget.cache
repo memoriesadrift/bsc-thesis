@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "+k5A12FdJJ1QWJNIYEhcwYDRmlIU/r30h5AcNPqSfTlO1pJ3aGL43dAH39484po4rVt3vlrFl8+NUbWMP6eR9Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\SAMO\\Desktop\\UNI\\bsc-thesis\\implementation\\src\\Payload\\Payload.vbproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SAMO\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.25\\microsoft.netcore.app.runtime.win-x86.3.1.25.nupkg.sha512",
+    "C:\\Users\\SAMO\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\3.1.25\\microsoft.windowsdesktop.app.runtime.win-x86.3.1.25.nupkg.sha512",
+    "C:\\Users\\SAMO\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\3.1.25\\microsoft.aspnetcore.app.runtime.win-x86.3.1.25.nupkg.sha512"
+  ],
+  "logs": []
+}
