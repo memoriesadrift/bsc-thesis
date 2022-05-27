@@ -36,7 +36,7 @@ int print_array(FILE *file) {
   do {
     read = fread(buffer, 2, sizeof buffer / 2, file);
     for (size_t i = 0; i < read; i++) {
-      printf("'%d', ", buffer[i]);
+      printf("%d, ", buffer[i]);
       if (i % 10 == 0 && i != 0) {
         printf("\n  ");
       }
