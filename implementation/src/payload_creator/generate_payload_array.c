@@ -32,7 +32,8 @@ int print_array(FILE *file) {
   size_t read;
   unsigned short buffer[8192];
 
-  printf("const data = [\n  ");
+  // Use var over const because MS JScript doesn't always support it
+  printf("var data = [\n  ");
   do {
     read = fread(buffer, 2, sizeof buffer / 2, file);
     for (size_t i = 0; i < read; i++) {
