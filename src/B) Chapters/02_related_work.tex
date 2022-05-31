@@ -544,9 +544,9 @@ intents and purposes.
 
 Generally speaking, file formats that don't require the header of the format to be located at offset 0, right at the
 very beginning of the file are troublesome from the point of view of being able to conceal data, but even more 
-troublesome are formats that use a \emph{terminator} character or sequence to signal to the program reading the file 
-that the contents of the file are over, even though there may theoretically be further bytes of data following the 
-terminator.
+troublesome are formats that use a \emph{terminator} character or sequence of characters to signal to the program reading 
+the file that the contents of the file are over, even though there may theoretically be further bytes of data following 
+the terminator.
 
 \subsubsection{\acrfull{PNG} File Format}
 
@@ -569,8 +569,12 @@ appending more bytes of data to the end of this \acrshort{PNG} file.
 
 This is the exact trick that was used by the Lazarus \acrshort{APT} group in the malicious document that we analyse to
 smuggle a malicious payload disguised as a simple \acrshort{PNG} image embedded in a Word document \cite{jazi-article}.
+Of course, detecting these hidden payloads is possible, and the attackers can't just attach infected executables to
+images anywhere they want, since their traces are often picked up by antivirus software even through this concealment
+method.
 
 \section{Microsoft Word Documents}
+  
 
 \subsection{History of the Word Document File Format}
 \subsubsection{.doc}
