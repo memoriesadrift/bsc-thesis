@@ -37,6 +37,36 @@
     tabsize=2
 }
 
+%
+% JavaScript version 1.1 by Gary Hammock
+%
+% Reference:
+%   B. Eich and C. Rand Mckinney, "JavaScript Language Specification
+%     (Preliminary Draft)", JavaScript 1.1.  1996-11-18.  [Online]
+%     http://hepunx.rl.ac.uk/~adye/jsspec11/titlepg2.htm
+%
+
+\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+    new, return, this, typeof, var, void, while, with},
+  % Literals, primitive types, and reference types.
+  morekeywords=[2]{false, null, true, boolean, number, undefined,
+    Array, Boolean, Date, Math, Number, String, Object},
+  % Built-ins.
+  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
+
+\lstdefinestyle{JavaScript}{
+  language=JavaScript,
+  style=mystyle
+}
+
 \lstset{style=mystyle}
 
 %package to allow comments/notes by you and other people

@@ -38,7 +38,7 @@ macros} button out of habit, not realising the severity of their actions \cite{m
   \centering
   \includegraphics[width=0.9\textwidth]{figures/malware-process-graph.png}
   \label{process-graph}
-  \caption{Malware Process Graph}
+  \caption{Malware process graph}
 \end{figure}
 
 After the victim enables macros, a message box pops up informing the user a demonstration of the payload dropping
@@ -55,7 +55,7 @@ key constants in order to avoid automated detection and to make analysis more di
 methodology includes introducing encoded strings, misleading variable names as well as some excess declarations to 
 serve as smoke and mirrors for analysts.
 
-\begin{lstlisting}[language=VBScript, caption={Encoded Strings in the Macro}][H]
+\begin{lstlisting}[language=VBScript, caption={Encoded strings in the macro}][H]
   MyCalc = "d2lubWdtdHM6Ly8uL3Jvb3QvY2ltdjI6V2luMzJfUHJvY2Vzcw==" ' winmgmts://./root/cimv2:Win32_Process
   Dim Calc As String : Calc = Decode(MyCalc)
   Dim MyValue As String : MyValue = "bXNodGE=" ' mshta
