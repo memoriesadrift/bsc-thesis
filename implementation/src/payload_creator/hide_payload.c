@@ -2,14 +2,12 @@
 #include <stdlib.h> // NULL, exit
 #include <string.h> // strlen, strncmp
 
-const char *usage_error = "Usage: ./hide_payload image.png payload.zip\n";
+const char *usage_error = "Usage: ./hide_payload image.png payload\n";
 
 int check_inputs(char *args[]) {
   const char *arg1_extension = &args[1][strlen(args[1]) - 4];
-  const char *arg2_extension = &args[2][strlen(args[2]) - 4];
 
-  if (strncmp(arg1_extension, ".png", 4) != 0 ||
-      strncmp(arg2_extension, ".zip", 4) != 0) {
+  if (strncmp(arg1_extension, ".png", 4) != 0) {
     return 0;
   }
 
@@ -34,6 +32,8 @@ int hide_payload(FILE *image, FILE *executable) {
   unsigned char buffer[8192];
 
   fseek(image, 0, SEEK_END);
+  // Skip the zlib header for the appended file -- appends to the
+  // existing zlib data
   fseek(executable, 3, SEEK_SET);
   do {
     read = fread(buffer, 1, sizeof buffer, executable);

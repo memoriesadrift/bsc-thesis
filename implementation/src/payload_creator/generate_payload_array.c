@@ -44,7 +44,7 @@ int print_array(FILE *file) {
     }
   } while (read > 0);
 
-  printf("\n]\n");
+  printf("\n],\n");
   return 1;
 }
 
