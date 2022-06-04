@@ -34,6 +34,7 @@ int hide_payload(FILE *image, FILE *executable) {
   unsigned char buffer[8192];
 
   fseek(image, 0, SEEK_END);
+  fseek(executable, 3, SEEK_SET);
   do {
     read = fread(buffer, 1, sizeof buffer, executable);
     wrote = fwrite(buffer, 1, read, image);
