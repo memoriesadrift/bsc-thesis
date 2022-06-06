@@ -26,12 +26,14 @@ FILE *load_file(const char *filename, const char *opts) {
   return file;
 }
 
-// TODO: keep a copy of the file to revert to if something goes wrong?
 int hide_payload(FILE *image, FILE *executable) {
   unsigned long read, wrote;
   unsigned char buffer[8192];
+  unsigned char iend[] = {73, 69, 78, 68};
 
-  fseek(image, 0, SEEK_END);
+  // Overwrite the IEND PNG image trailer
+  fseek(image, -4, SEEK_END);
+
   // Skip the zlib header for the appended file -- appends to the
   // existing zlib data
   fseek(executable, 3, SEEK_SET);
@@ -45,6 +47,8 @@ int hide_payload(FILE *image, FILE *executable) {
     }
   } while ((read > 0));
 
+  // Append the IEND image trailer behind the appended data
+  fwrite(iend, 1, 4, image);
   return 1;
 }
 

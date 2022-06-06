@@ -12,7 +12,7 @@ var _0x187d = function(_0x1d5195, _0x59a857) {
   return _0x4fbae6;
 }
 
-var _0x556975 = _0x187d // Function alias
+var _0x556975 = _0x187d; // Function alias
 
 // self invoking function
 // arg1: the command array _0x4fba
