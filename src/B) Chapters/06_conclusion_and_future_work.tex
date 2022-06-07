@@ -1,1 +1,35 @@
 \chapter{Conclusion and Future Work}
+The main goal of our work was to attempt to recreate a unique malware that used an innovative payload extraction method
+to avoid detection. This malware appeared in April 2021 and was reported on later that year by Malwarebytes
+\cite{jazi-article}. We used this report by Malwarebytes, authored by Senior Threat Analyst Hossein Jazi, as the basis
+of our recreation, using the source code they provided and amending it where necessary.
+
+The main finding of our work is that the malware in question \emph{no longer works as described} on current systems. The
+main system we tested for was Windows 10, reasoning it to be the most commonly used operating system at the moment, as
+well as the operating system targeted in the original attack. % TODO: amend with win 7 testing
+The specific version of the operating system we tested was Windows 10 Pro 64-bit, build 19044, with the version of 
+Microsoft Word tested on being a Microsoft 365 copy, version 2205, Build 15225.20204 Click-to-Run.
+Our testing could be improved by including multiple versions of Microsoft Office as well as Windows, but we decided to
+limit ourselves to what we viewed as a likely target system. 
+
+One of the key limitations that faced us in the recreation was that the image conversion function at the heart of the
+attack was not made available by Malwarebytes. We obtained the conversion function from a third party malware analysis
+company (Docguard) who published macro source code of a malicious document they analysed, which matched the malicious
+document covered in the Malwarebytes article in virtually all regards, with only a few strings changed.
+
+Though we believe that the faulty image conversion function has been patched, testing it with the function obtained
+directly from the source that first reported on it would clear any doubts about it not being patched. Regardless, we 
+conclude that the \acrfull{WIA} image conversion functionality present in \acrshort{VBA} \emph{has been patched}.
+
+For ease of recreation and further testing, we provide the source code used in our recreation. We provide both the
+macro code and the steganography tools we created for use in generating an image payload for use with the exploit.
+These resources are provided strictly for informational and educational use.
+
+Further research into this specific malware would most likely serve to check what older systems are still vulnerable.
+Our research as well as any further research into this malware will prove useful if a similar steganography method were
+to be found in \acrshort{WIA} in the future. 
+We think that further research in the field of steganography would prove more fruitful than focusing on the specific 
+exploit used in the malware we analyse in this work. 
+Analysing other file formats that use compressed data streams to store data and the conversion mechanisms that exist 
+for them can also help uncover further vulnerable file formats or conversion algorithms. 
+
