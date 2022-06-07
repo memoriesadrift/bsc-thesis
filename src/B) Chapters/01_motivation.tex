@@ -11,33 +11,36 @@ that was itself concealed as a \acrfull{PNG} file. This malicious file was extra
 a macro in the macro-enabled Word document, which is also a very interesting part of the infection process. 
 
 This document piqued my interest for a multitude of reasons, chief among which was the interesting mechanism used
-to infect the victim's device, which used a quirk of the \acrshort{BMP} file format and a conversion function built into
-the \acrfull{VBA} programming language used to write macros that can be embedded in Word Documents. Using this 
-functionality allowed the malicious payload to be concealed under many layers of file formats while also keeping
-the extraction process quite simple, almost routine. The attack itself was also rather creative, using an interesting
-attack vector and custom toolchain typical for this threat actor.
+to infect the victim's device, which used a quirk of the \acrshort{PNG} and \acrshort{BMP} file formats and a conversion 
+function from the \acrfull{WIA} \acrshort{API} in the \acrfull{VBA} programming language used to write macros 
+that can be embedded in Word Documents. 
 
-The problem with attacks like this is that since files are all simply a series of bytes in the end, with the
-interpretation being governed largely by how the operating system or program interacting with the file interprets 
-those underlying bytes. Due to how file formats are defined, some formats are more suitable for attacks than others
-and with the multitude of formats supported and used over the decades of computing, it is only inevitable that there
-would be a way to misuse some format in some way -- one of which being \acrshort{BMP} in this case. I believe it is 
-valuable to inspect this attack to shed light on how potential future attacks could be carried out. % TODO: Reword or sth
+Using this functionality allowed the malicious payload to be concealed under many layers of file formats while also keeping
+the extraction process quite simple, almost routine and ceratinly benign looking. The attack itself was also rather 
+creative, using an interesting attack vector and custom toolchain typical for this threat actor.
 
-Out of interest as well as scientific rigour I will attempt to recreate this malware, foregoing the malicious payload
-of course, and analyse its effectiveness. The main questions I will seek to answer are the following:
+The core of attacks like this one is that since files are all simply a series of bytes in the end -- the
+interpretation is governed by how the operating system or program interacting with the file interprets 
+those underlying bytes. 
+
+Due to how file formats are defined, some formats are more suitable for attacks than others
+and with the multitude of formats supported and used over the decades of computing, it is only inevitable that 
+there would be a way to misuse some format in some way -- that being \acrshort{PNG} in this case. 
+I believe it is valuable to recreate this attack to shed light on how potential future attacks could be carried out.
+
+Out of interest as well as scientific rigour I will attempt to recreate this malware, and analyse its effectiveness,
+foregoing the malicious payload and causing no damage in the process. The main questions I will seek to answer are the following:
 \begin{itemize}
-  \item In what ways can a file hide malicious content?
+  \item How can a file hide malicious content?
   \item How can a concealed malicious payload be extracted from a file and executed?
-  \item How do the previous questions come together to drop the RAT in the analysed document?
+  \item How do the previous questions come together to drop the \acrfull{rat} in the analysed document?
   \item Can the analysed document be recreated? Does the exploit still work?
-  \item Does the analysed document avoid detection by antivirus software?
   \item Are common systems still vulnerable?
 \end{itemize}
 
-Thus, the primary goal of this work will be to recreate the malicious Microsoft Word document along with the \acrshort{BMP}
-payload and secondary mocked \acrfull{EXE} payload without the actual \acrlong{RAT}. Recreating this malware should help
-verify the reproducibility of the original postmortem of the attack and its functionality as well as help gain further
+Thus, the primary goal of this work will be to recreate the malicious Microsoft Word document along with the image
+payload and secondary mocked \acrfull{EXE} payload without the actual \acrlong{rat}. Recreating this malware should help
+verify the reproducibility of the attack and its functionality as well as help gain further
 insight into how vulnerable current systems are to a similar attack, if at all. Furthermore, this analysis may yield
 advice other than the simple adage of not opening macro-enabled documents. Though, of course, this is always the best
 protection mechanism against malware using \acrshort{VBA} macros as their attack vector.
@@ -60,4 +63,6 @@ In summary, recreating this attack can lend insight into how file formats can be
 avoid detection while doing so. It also serves as an effort to validate the previous research done of this malware and
 make sure the results of that research are reproducible. Furthermore, the alternative setup using a facsimile of the
 malicious file may provide additional insight that had previously gone unnoticed.
+
+\clearpage
 

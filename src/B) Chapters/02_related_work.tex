@@ -548,7 +548,7 @@ troublesome are formats that use a \emph{terminator} character or sequence of ch
 the file that the contents of the file are over, even though there may theoretically be further bytes of data following 
 the terminator.
 
-\subsubsection{\acrfull{PNG} File Format}
+\subsection{\acrfull{PNG} File Format}
 
 One notable file format specification that uses a terminator to signal the end of usable data is the \acrfull{PNG}.
 The \acrshort{PNG} file format is a thoroughly defined format for storing raster images in a well-compressed, portable
@@ -578,7 +578,7 @@ Zlib is an abstraction over the Deflate compression algorithm, which uses an LZ7
 Though this is a relatively mundane detail, it's important to mention, as our re-implementation of the malicous document
 requires the compression of a malicious payload to be masked in the \acrshort{PNG} data stream.
 
-\section{Microsoft Word Documents}
+\subsection{Microsoft Word Documents}
 Microsoft Word is a proprietary word processing software which allows the users to write and edit documents in a simple
 \acrfull{GUI}. These documents are most commonly stored in files ending in the extensions \verb+.doc+, 
 \verb+.docx+, or \verb+.docm+. Though many word processors exist on the market, with a healthy amount of both
@@ -596,7 +596,7 @@ Though the intricacies of how Microsoft Word works don't interest us, it suffice
 \acrshort{GUI} for the user to write documents, format them, as well as attach images, tables and other items to
 documents. Additionally, it also supports saving documents to other file formats, for example \acrshort{HTML} files.
 
-\subsection{Macros and Scripting}
+\subsubsection{Macros and Scripting}
 One of the defining features of the Microsoft Office suite, including Word, is the ability to write macros to automate tasks.
 These macros can be used for benign tasks such as automating repetitive tasks, but have the potential to be much more
 malicious. Macros are written using the \acrfull{VBA} programming language, letting the user write and execute arbitrary
@@ -613,7 +613,7 @@ unless the user allows the document to execute macros by clicking a button in a 
 However, this simple warning is quite inefficient with one study finding that 63.9\% of the participants unnecessarily 
 enabled macros \cite{macro-viruses-users}.
 
-\subsection{Use in Malware}
+\subsubsection{Use in Malware}
 The first use of Microsoft Word in malware was the WM.Concept virus in 1995, which had no malicious side effects, aside from
 copying itself over the master template for documents, making each new document contain a copy of the virus
 \cite{malware-evolution}. This virus used an early scripting language designed for Microsoft Word, but even when
@@ -635,52 +635,5 @@ technical knowledge. Once the victim allows macro execution, the attacker's scri
 often communicating with a remote server to obtain a further malicious payload, extracting a malicious payload hidden
 in the document, or infecting further files in the system with a copy of the malware.
 
-% --------------------------------------------------
-% Notes
-% --------------------------------------------------
-
 \clearpage
 
-Background
-\begin{enumerate}
-  \item What is Malware?
-  \item Attack Vectors
-    \begin{itemize}
-      \item Social Engineering
-        \begin{itemize}
-          \item Phishing / Spear Phishing
-          \item Insider Threat
-          \item Compromised or Weak Credentials
-        \end{itemize}
-      \item Vulnerabilities (CVE)
-    \end{itemize}
-  \item Malware
-  \begin{itemize}
-    \item Payload types
-    \item Concealing / Obfuscation + common techniques
-  \end{itemize}
-  \item Files
-    \begin{itemize}
-      \item What is a file
-      \item Bitmap images
-      \item Hiding extra content in files
-      \item File format hacking
-    \end{itemize}
-  \item Word Documents
-    \begin{itemize}
-      \item Format description
-      \item Macros / Scripting
-      \item Use in Malware
-      \item What about not using MS Office suite to open documents
-    \end{itemize}
-  \item Lazarus
-    \begin{itemize}
-      \item Threat Actor
-      \item Advanced Persistent Threat
-      \item Actor Profile -- Lazarus
-      \item WannaCry?
-    \end{itemize}
-
-
-
-\end{enumerate}

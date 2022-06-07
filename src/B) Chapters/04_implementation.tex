@@ -46,7 +46,6 @@ There were two tasks that needed to be done to prepare the payload executable fo
 \end{enumerate}
 
 \subsection{Payload Serialisation}
-% TODO: should the reference be cited?
 The payload serialisation was a rather straightforward process. Since the payload loader deserialises the payload by
 using the JavaScript static method \verb+String.fromCharCode()+ we want to split the payload executable into an array 
 of conformant data. The \verb+String.fromCharCode()+ method takes an arbitrary number of arguments, all of which are
@@ -504,24 +503,6 @@ the macro file. The malicious document is ready for use.
   \caption{The malicious document, ready to be used}
 \end{figure}
 
+\clearpage
 
-% --------------------------------------------------
-% Notes
-% --------------------------------------------------
-\clearpage
-\begin{itemize}
-  \item explain how you engineered your tool/technique
-  \item focus on the interesting bits here, you do not have to explain all your code
-  \item one goal of this section is to allow someone else to reproduce your work
-  \item where to find the code, how to compile it, how to deploy it
-  \item prerequisites for running the prototype or demo
-\end{itemize}
-How I recreated the malware
-\begin{itemize}
-  \item RAT creation?
-  \item BMP payload creation
-  \item Word script to execute payload
-  \item Obfuscation
-  \item Phishing document creation
-\end{itemize}
-\clearpage
+

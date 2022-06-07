@@ -6,7 +6,6 @@
 
 % important update for glossaries, before document 
 \loadglsentries{C) Back Matter/acronyms.tex}
-\loadglsentries{C) Back Matter/glossary.tex} 
 \makeglossaries %https://www.overleaf.com/learn/latex/glossaries
 
 %shows fixme notes
@@ -29,12 +28,8 @@
 	
     \microtypesetup{protrusion=false}
     \tableofcontents{}
-    % Use an optional list of tables / figures / algorithms / listings(code).
-    \listoftables 
     \listoffigures
     \cleardoublepage{}
-    \listofalgorithms
-    \addcontentsline{toc}{chapter}{List of Algorithms} 
     \cleardoublepage{}
     \lstlistoflistings
     \cleardoublepage{}
@@ -42,7 +37,6 @@
     
 	\pagebreak
 	
-	%add your chapters here
 	\mainmatter{}
     \input{B) Chapters/01_motivation}
     \input{B) Chapters/02_related_work}
@@ -51,20 +45,12 @@
     \input{B) Chapters/05_evaluation_and_discussion}
     \input{B) Chapters/06_conclusion_and_future_work}
     
-	%add your sources in the bib file and change the style here
     \bibliographystyle{alpha}
 	\bibliography{bibliography}
 	
 	\printglossary[type=\acronymtype]
-    \printglossary
 
     \cleardoublepage{}
 	\pagebreak
-	
-	%add your end matter here
-	\appendix{}
-
-	\input{C) Back Matter/appendix}
-	
 	
 \end{document}
