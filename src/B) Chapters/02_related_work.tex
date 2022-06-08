@@ -1,27 +1,28 @@
 \chapter{Related Work}
 % TODO: Write a short introduction?
-\section{What Is Malware?}
+\section{What Is Malware?} \label{sec:malware}
 Though defining malware might seem as a simple task, formally defining it has been a difficult open problem in 
 computer virology for a long time; the precise reasoning for this stems from the fact that each algorithm or
 piece of software can be expressed logically and has certain \emph{intended behaviour}, which often isn't
-properly defined \cite{malware-definition}. Kramer and Bradfield posit a logical definition of malware which
-we won't fully dedicate ourselves to, but their introduction to the concept without the use of logical language
-is worth mentioning. They posit malware as software that causes the actual behaviour of some other software
-to differ from its intended behaviour, where this difference stems from an incorrectness in verification or
-validation of program behaviour, leading to a defining characteristic of malware being the \emph{causation of incorrectness}
-\cite{malware-definition}. 
+properly defined \cite{malware-definition}. 
+
+Kramer and Bradfield posit a logical definition of malware which we won't fully dedicate ourselves to, but their 
+introduction to the concept without the use of logical language is worth mentioning. 
+They posit malware as software that causes the actual behaviour of some other software to differ from its intended behaviour, 
+where this difference stems from an incorrectness in verification or validation of program behaviour, leading to a 
+defining characteristic of malware being the \emph{causation of incorrectness} \cite{malware-definition}. 
 
 Moving from this more formal definition to a more informal one, Skoudis defines malware as "[...]a set of instructions that 
 run on your computer and make your system do something that an attacker wants it to do \cite{skoudis-book}". For our
 intents and purposes this definition is sufficient, and we will further broaden it to our working definition:
 \begin{quote}
-  Malware is software maliciously designed to do whatever its author wants, unconstrained by legality, consent or
-  permission.
+  Malware is software maliciously designed to do whatever its author wants, unconstrained by correctness, legality, 
+  consent or permission.
 \end{quote}
 
 \subsection{Motivation}
 Malicious actors can act in a multitude of ways, with motivations behind their actions grouped into a few overarching
-categories. While different classifications exist, we will be basing ours on a classification by Brewster et al.
+categories. Although different classifications exist, we will be basing ours on a classification by Brewster et al.
 While there are many reasons for malware authors to act maliciously, the creation of malware doesn't always have
 to be malicious. Malware can also be created to showcase a vulnerability and call attention to it, so that the 
 security of the system  under attack can be improved without causing any actual damage. These kinds of actors are 
@@ -33,7 +34,7 @@ Attackers motivated by ideology fall into this category. In the taxonomy by Brew
 \emph{political, ideological and informational / promotional} categories, wherein the actors act based on a political
 agenda (such as espionage, sabotage or political protest), a held belief (such as the belief in freedom of information)
 that views hacking into systems as a necessary act, or the desire to disseminate information and increase public
-awareness \cite{brewster-malware-motivation}.
+awareness of some issue \cite{brewster-malware-motivation}.
 
 A famous example of a political attack is the Stuxnet worm that targeted Iranian nuclear facilities in the year
 2010 \cite{brewster-malware-motivation}. Stuxnet is reported to have been perpetrated by the US and Israeli governments,
@@ -45,8 +46,7 @@ While ideological actors in the taxonomy by Brewster et al. are similar to polit
 distinguished because the beliefs they hold are personal, such as a protest against something they oppose or their 
 religion \cite{brewster-malware-motivation}. Informational / promotional actors are, in our opinion, very similar to
 these kinds of actors, with a famous example being Edward Snowden. Snowden is wanted by US authorities on charges of
-espionage after stealing and subsequently leaking thousands of documents pertaining to government espionage against its
-own citizens \cite{snowden}.
+espionage after leaking thousands of documents pertaining to government espionage against its citizens \cite{snowden}.
 
 \subsubsection{Commercial}
 Attackers that pursue some sort of financial, commercial or economic gain fall into this category. Brewster et al.
@@ -57,20 +57,20 @@ property \cite{brewster-malware-motivation}.
 We believe these motivations to be sufficiently similar to allow them to be grouped under one umbrella term.
 
 \subsubsection{Personal}
-The final category we observe joins together the remaining categories in the studied taxonomy, encompassing motivations
+The final category we observe joins together the remaining categories of the studied taxonomy, encompassing motivations
 that are directly related to a person's own life. These are distinct from the ideologically motivated actors, as their
-actions aren't necessarily driven by ideology, but more so by emotion or way of life. This category encompasses actors
-that act emotionally, such as out of anger, boredom or who seek revenge, actors that hack because they find it fun or
+actions aren't necessarily driven by ideology, but rather by emotion or a way of life. This category encompasses actors
+that act emotionally, such as out of anger, boredom or actors who seek revenge, hack because they find it fun or
 challenging, or want validation from peers, or even actors that resort to hacking due to how they choose to live their
 life, such as trolls hacking as a means of causing emotional distress to their targets
 \cite{malware-motivation-classification, brewster-malware-motivation}.
 
 \subsection{Types of Malware}
-Malware comes in many shapes in sizes that have some characteristics in common, while differing on others. The most
+Malware comes in many shapes and sizes that have some characteristics in common, while differing on others. The most
 basic part that all malware has in common is the \emph{payload}, or what the malware is supposed to do 
 \cite[p.~12]{aycock-book}. This could be anything, but it is often understood to mean the malicious activity that 
 the malware performs. Another property we consider all malware to have in common is an \emph{attack vector} or how
-the malware gains access to the victim's system. We will cover attack vectors separately, but some examples include
+the malware gains access to the victim's system. Some examples of attack vectors include
 social engineering, phishing, drive-by attacks, droppers or abuse of a vulnerability.
 
 Where malware begins to differ are the other properties -- Aycock posits a taxonomy based on the following three 
@@ -92,23 +92,27 @@ for each property.
   \cite[p.~11-12]{aycock-book}
 \end{quote}
 Where these three characteristics are not sufficient to differentiate two types of malware, additional clarification can
-be provided to distinguish the two; for example while \emph{spyware} and \emph{adware} both are not self-replicating,
+be provided to distinguish the two; for example while \emph{spyware} and \emph{adware} both aren't self-replicating,
 have no population growth and are not parasitic, their payloads differ -- where spyware collects information for
 exfiltration, adware often uses collected information for advertising purposes, spamming the user with advertisements
 or exfiltrating information to gain a competitive edge \cite[p.~16-17]{aycock-book}. 
 
 \subsubsection{Viruses}
 Throughout our research, we have repeatedly come across a definition by Cohen, one of the first 
-people to conduct research into computer viruses, which goes as follows: "A virus is a program that can ‘infect’ other 
-programs by modifying them to include a, possibly evolved, version of itself \cite{cohen-virus-course}." The term
-\emph{infect} is understood to mean the modification of the target program to include a copy of the virus as explained
-in the remainder of the definition. 
+people to conduct research into computer viruses, which goes as follows: 
+\begin{quote}
+A virus is a program that can ‘infect’ other programs by modifying them to include a possibly 
+evolved version of itself \cite{cohen-virus-course}.
+\end{quote}
+The term \emph{infect} is understood to mean the modification of the target program to include a 
+copy of the virus as explained in the remainder of the definition. 
 
 Describing viruses using the three metrics outlined by Aycock, we consider viruses to self-replicate, have a positive 
 population growth and be parasitic \cite[p.~14]{aycock-book}. Though viruses spread across the infected system 
 (leading to the positive population growth), they notably don't spread through networks, which is the domain of worms, 
 covered in the following section \cite[p.~15]{aycock-book}.
 
+% TODO: possibly cut
 Viruses are generally noted to be structured in three distinct parts: 
 \begin{itemize}
   \item the \emph{infection vector} -- how the virus spreads across a system. It doesn't necessarily have to be unique,
@@ -119,7 +123,7 @@ Viruses are generally noted to be structured in three distinct parts:
     as the virus payload intending to open a back door to the system, allowing the attacker to access the system and use
     it as part of a botnet.
 \end{itemize}
-\cite[p.~7, p.~27]{viruses-revealed-book,aycock-book} %TODO: Is this citation style correct? 
+\cite[p.~7, p.~27]{viruses-revealed-book,aycock-book} % TODO: Is this citation style correct? 
 
 Viruses, as described, infect files in order to spread and eventually drop their payload. There are numerous ways this
 infection can take place: The file itself can be modified by the virus to contain a copy of the virus in a process known
@@ -128,6 +132,7 @@ correct file after doing whatever it pleases after the user attempts to open the
 shortcut) in what is called a companion virus, or, most importantly for the topic of this work, the virus can be
 embedded in the macro section of a document format that supports macros, for example Microsoft Word \cite{aycock-book,
 skoudis-book}. 
+% TODO: cut end
 
 Macros are a simple tool that was originally intended to increase the productivity of users using word
 processors such as Microsoft Word. Using macros allows the user to run arbitrary code at will, for example when the
@@ -148,7 +153,7 @@ disks between computers \cite{cohen-virus-course}.
 Spreading through networks instead of just the local file system is a rather important trait, which is why malware capable of
 spreading throughout networks was given a new name: \emph{worm}. Worms share many characteristics with viruses -- on
 Aycock's taxonomy they share two properties: they both self-replicate and they both have a positive population growth,
-but differ in parasiticalness; worms forego being parasitic \cite[p.~15]{aycock-book}. Worms are standalone entities and
+but worms forego being parasitic \cite[p.~15]{aycock-book}. Worms are standalone entities and
 don't infect other files or rely on other executables; they can be thought of as infecting the machine itself \cite{
 aycock-book, viruses-revealed-book}.
 
@@ -164,11 +169,13 @@ attacker, since the worm rapidly spreads throughout the internet, one victim's c
 an IP address located in Ghana, while the next victim might be infected from a Swiss IP, making attribution, persecution
 as well as countermeasure development more difficult \cite{skoudis-book}.
 
+% TODO: possibly cut
 Worms are structured similarly to viruses, with a few minor differences. Skoudis proposes a model shaped like a missile,
 wherein a worm is described as having a warhead which serves to penetrate the attacked system, a propagation engine,
 scanning engine and target selection algorithm to facilitate the propagation of the worm to appropriately chosen and
 vulnerable victims, and finally a payload to be dropped on infected devices to compromise the system or otherwise cause
 damage to the victim \cite{skoudis-book}.
+% TODO: possibly cut
 
 There are various ways in which a worm can propagate across a network, often being given a name based on the spread 
 mechanism, e.g. \emph{email worm}. Because worms are standalone programs and don't rely on any particular files they can
@@ -186,7 +193,7 @@ while making the resulting attack harder to trace and more powerful \cite{skoudi
 The name of this malware threat comes from the epic poem \emph{Aeneid} by Virgil, which describes the final siege of the 
 war between the Greeks and the Trojans. The Greeks built a large wooden horse and hid a small part of their army inside
 it, then pretended to leave. The Trojans thought the horse was left as a gift and dragged it into the city. Unbeknownst
-to them, the horse was full of enemy soldiers that sneaked out of the horse under the cover of the night and opened the
+to them, the horse was full of enemy soldiers that snuck out of the horse under the cover of the night and opened the
 city gates from the inside for the attacking Greek army, ending the war then and there.
 
 Similarly to the horse the Greeks constructed in the Trojan war, \emph{trojan horses} are malicious programs that
@@ -205,7 +212,7 @@ is just one of many complexities in categorising malware, which we will gloss ov
 Just like for any other types of malware, a payload is important for the trojan to do any real damage. An important type
 of payload often carried by trojans is a backdoor, leading to a so-called \acrfull{rat}, also called Remote Access Trojan 
 \cite{viruses-revealed-book}. \acrshort{rat}s allow an attacker (or user of the \acrshort{rat}) to submit commands to
-the victim (target) computer, copy files to and from it, making the machine a tool at the attacker's disposal
+the victimised (target) computer and copy files to and from it, making the machine a tool at the attacker's disposal
 \cite{viruses-revealed-book}. The language of the previous sentence is purposefully vague on whether an attacker
 is acting maliciously, as remote control (or remote access) software plays a legitimate role in computing -- we often
 want to access a device remotely to work or copy files, such as by using \verb+ssh+.
@@ -214,15 +221,11 @@ want to access a device remotely to work or copy files, such as by using \verb+s
 victim's computer, turning the victim's device into a \emph{zombie}, potentially being able to use it to fuel
 \acrshort{ddos} attacks, as described in the \nameref{subsec:worms} subsection.
 
-
-\subsubsection{Ransomware}
-Ransomware will be discussed in depth in a further section discussing the current threat landscape, as it is an integral
-part of it.
-
 \subsection{Concealing Malware}
+% TODO: Write
 
 \section{Social Engineering and Phishing}
-One of the most common infiltration vectors used by malicious actors is social engineering, 
+One of the most common attack vectors used by malicious actors is social engineering, 
 where the victim is led to perform certain actions, divulge information or grant access to a 
 system based on psychological manipulation \cite{advanced-social-engineering-attacks, covid19-social-engineering}. 
 Social engineering continues to be among the top threats to companies in 2021, preying on the human
@@ -233,12 +236,13 @@ since the people using the system are the weakest link in its security \cite{adv
 social-engineering-attacks}.
 
 Though social engineering encompasses a multitude of different types of attacks ranging from physical to
-computer-assisted, we will be focusing on the computer-assisted side of social engineering, namely phishing. %TODO: why only?
+computer-assisted, we will be focusing on the computer-assisted side of social engineering, namely phishing.
 Phishing is a sociotechnical social engineering attack usually perpetrated through email or instant messaging 
 against a large amount of targets in the hopes of the attack being successful against enough targets to be 
 profitable \cite{advanced-social-engineering-attacks}. 
-Phishing carries an analogy to fishing -- messages sent to potential victims are analogous to the line 
-of a fishing rod, with the message contents serving as the bait. 
+
+Phishing carries an analogy to fishing -- messages sent to potential victims are analogous to the casting of 
+the line of a fishing rod, with the message contents serving as the bait. 
 The recipient of the phishing message is led to believe they must take an action outlined in the message,
 usually clicking a link or downloading an attachment, which will lead to the malicious actor stealing
 personal information from the victim or infecting the device with malware \cite{state-of-phishing}.
@@ -249,8 +253,11 @@ scheme in real life by, say, opening a fake brick-and-mortar business.
   us deal with deception in face-to-face contexts, but these are little use to us
   when we’re presented with an email that asks us to do something. \cite{anderson-security-engineering}
 \end{quote}
-While we don't concern ourselves with phishing directly, it is the most common attack vector used to deliver
-infected files like the one we study in this thesis.  % TODO: should I address the thesis like this? 
+
+Phishing serves as a very important attack vector in the current day, serving as an attack vector for any of the malware
+types described in section \ref{sec:malware}. Exploits that don't require the user to do anything in order to infect
+their machine are incredibly dangerous and effective, but more often than not it's easier to convince the victim to
+execute a file, or grant a program permissions that it should not have.
 
 \section{Current Threat Landscape}
 An overview of the current threat landscape is crucial to help us understand the role our analysed
@@ -358,6 +365,8 @@ malicious macro-enabled Word documents or exploited PDF files are already among 
 delivery, often as a form of downloading, de-obfuscating or decrypting the code that takes control of the machine
 \cite[p.~8-10]{ransomware-book}.
 
+% TODO: cut
+
 \subsubsection{Ransomware as a Service (RaaS)}
 As was mentioned in subsection \ref{sec:supply-chain-attacks}, companies are increasingly turning to external service providers 
 for their IT solutions and the same can be said for threat actors. Though distributing malware with the intent of
@@ -449,7 +458,7 @@ development in the current threat landscape:
 We've already been able to see some of their thoughts become reality during the Vastaamo attack, where the second
 development cited can be observed with attackers extorting the victim's customers.
 
-\subsection{State-sponsored Threat Actors}
+% TODO: cut end
 
 \section{File Format Security}
 Files are a fundamental building block of computing, primarily used to store data and index it by a file name.
@@ -497,7 +506,6 @@ while \verb+.bat+ is a batch file containing commands for the operating system t
 
 \subsection{File Formats}
 
-% TODO: Sources for next paragraph
 Though file extensions serve as an indicator to the user, the computer has to know how to parse the raw byte contents of
 the file, which is what file format specifications are for. File formats are standards used to encode data into binary 
 to be stored in files, as well as to decode it for future use. 
