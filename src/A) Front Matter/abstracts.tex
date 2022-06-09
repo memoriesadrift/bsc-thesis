@@ -1,9 +1,17 @@
-	%Please consider the following section of the "Formvorschriften für die gedruckte Version"
-	%Im Anhang ist eine Zusammenfassung (Abstract) mitzubinden. 
-	%Ist die Arbeit in einer Fremdsprache verfasst, ist im Anhang jedenfalls eine deutsche Zusammenfassung mitzubinden.
 \chapter{Abstract}
-		% TODO: Write
-		This \LaTeX{} template provides example on how to format and display text, 
-		mathematical formulas, and insert tables or images. There is a lot more you 
-		can do with \LaTeX{}, for more information check out https://en.wikibooks.org/wiki/LaTeX.
-		I'm sure changes work just fine. 
+Concealing executable files in data files is a common concealment mechanism used by malware authors to hide malicious
+code within benign looking files, such as the use of \acrshort{VBA} macros within Microsoft Word document files.
+In this thesis we attempt to recreate a malware attack where a malicious actor used steganography to hide a compressed 
+malicious \acrshort{HTA} payload dropper within a \acrshort{PNG} image. This \acrshort{PNG} was extracted using a native 
+Windows image conversion \acrshort{API} (\acrshort{WIA}) to convert the \acrshort{PNG} image to \acrshort{BMP}, which
+unintentionally also extracted the compressed payload dropper, bypassing security mechanisms and allowing the payload
+dropper to be executed. 
+
+Our recreation of the malware was unsuccessful, with the conversion mechanism being the only part that faltered, leading
+us to the belief that the faulty conversion mechanism has been patched on the Windows 10 operating system, though we 
+were unable to find any patch notes confirming this. 
+All the other steps of the malware were completed successfully, with the payload dropping mechanism as 
+well as the macro executing a pre-extracted payload (bypassing the conversion mechanism) worked as in the original
+attack. Thus, the conclusion of our work is that current systems are no longer vulnerable to the specific vulnerability
+used to engineer this attack.
+

@@ -1,3 +1,17 @@
 \chapter{Kurzfassung}
-Das ist eine deutsche Kurzfassung meiner in Englisch verfassten Masterarbeit.
+Das Verstecken von ausführbaren Dateien in Datendateien ist ein häufig verwendeter Verschweigungsmechanismus der
+Malwareauthoren verwenden, um ihren Code in gutartig aussehende Dateien zu verstecken, zum Beispiel unter Verwendung von
+\acrshort{VBA}-Makros in Microsoft Word Dokumente.
+In diese Bachelorarbeit versuchen wir einen Malwareangriff zu reproduzieren, wo die Malwareauthoren Steganografie
+verwendet haben, um ein komprimierter \acrshort{HTA} Payload Dropper in einer \acrshort{PNG} Bilddatei zu verstecken. Diese
+\acrshort{PNG} Datei wurde dann mittels einer Windows nativer \acrshort{API} (\acrshort{WIA}) in einer \acrshort{BMP}
+Datei umgewandelt, was ungewollt auch den komprimierter \acrshort{HTA} Payload extrahiert hat, was Sicherheitsmaßnahmen
+ausgewichen hat und die Exekution von dem Payload Dropper ermöglicht hat.
+
+Unsere Reproduktion von der Malware ist nicht gelungen, wobei nur der fehlerhafte Umwandlungsmechanismus fehlgeschlagen hat. 
+Deswegen glauben wir, dass dieser auf dem Windows 10 Betriebssystem gepatcht wurde, auch wenn wir keine Patchnotes die
+darüber informieren würden gefunden haben. Alle andere Exekutionsschritte wurden erfolgreich ausgeführt, wobei der
+Payload Dropper und eine vorextrahierte Payload (wann der Umwandlungsmechanismus nicht verwendet ist)
+ausgeführt wurde. Daher ist die Schlussfolgerung unserer Arbeit, dass aktuelle Systeme nicht mehr anfällig auf die 
+spezifische Schwachstelle sind, die zum Entwickeln dieses Angriffs verwendet wird.
 \clearpage
