@@ -1,5 +1,6 @@
 \chapter{Related Work}
-% TODO: Write a short introduction?
+% TODO: Remove
+\section{Note: I feel like this chapter needs cuts}
 \section{What Is Malware?} \label{sec:malware}
 Though defining malware might seem as a simple task, formally defining it has been a difficult open problem in 
 computer virology for a long time; the precise reasoning for this stems from the fact that each algorithm or
@@ -221,9 +222,6 @@ want to access a device remotely to work or copy files, such as by using \verb+s
 victim's computer, turning the victim's device into a \emph{zombie}, potentially being able to use it to fuel
 \acrshort{ddos} attacks, as described in the \nameref{subsec:worms} subsection.
 
-\subsection{Concealing Malware}
-% TODO: Write
-
 \section{Social Engineering and Phishing}
 One of the most common attack vectors used by malicious actors is social engineering, 
 where the victim is led to perform certain actions, divulge information or grant access to a 
@@ -258,6 +256,13 @@ Phishing serves as a very important attack vector in the current day, serving as
 types described in section \ref{sec:malware}. Exploits that don't require the user to do anything in order to infect
 their machine are incredibly dangerous and effective, but more often than not it's easier to convince the victim to
 execute a file, or grant a program permissions that it should not have.
+
+The document we analysed, much like many Microsoft Word macro viruses begins with a call to action for the user to
+enable macros, something Microsoft Word disables by default, presenting the user with a pop-up asking if they want to
+enable macro execution and warning them to only run macros from trusted sources. However, this warning is often not
+sufficient, with many users ignoring the warning out of a lapse of judgement, lack of technical skills or knowledge of
+what macros can do, or due to social engineering, believing the source to be trusted when it is not
+\cite{macro-viruses-users}.
 
 \section{Current Threat Landscape}
 An overview of the current threat landscape is crucial to help us understand the role our analysed
@@ -366,7 +371,6 @@ delivery, often as a form of downloading, de-obfuscating or decrypting the code 
 \cite[p.~8-10]{ransomware-book}.
 
 % TODO: cut
-
 \subsubsection{Ransomware as a Service (RaaS)}
 As was mentioned in subsection \ref{sec:supply-chain-attacks}, companies are increasingly turning to external service providers 
 for their IT solutions and the same can be said for threat actors. Though distributing malware with the intent of
