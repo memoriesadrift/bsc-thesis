@@ -57,7 +57,7 @@ argument to the program and saves it into a buffer array of \verb+unsigned short
 \acrshort{HTA} file easier in an automated script. The output is an array that can be copied into the source code of
 the \acrshort{HTA} file directly.
 
-\begin{lstlisting}[language=C, caption={Payload serialisation function}][H]
+\begin{lstlisting}[language=C, caption={Payload serialisation function}]
 int print_array(FILE *file) {
   size_t read;
   unsigned short buffer[8192];
@@ -86,7 +86,7 @@ We also implemented rudimentary input argument checking to help a user order the
 expects the target \acrshort{PNG} file as the first argument and the compressed payload as the second argument.
 
 \begin{lstlisting}[language=C, caption={Payload concealment function to attach the compressed \acrshort{HTA} to the
-\acrshort{PNG}.}][H]
+\acrshort{PNG}.}]
 int hide_payload(FILE *image, FILE *executable) {
   unsigned long read, wrote;
   unsigned char buffer[8192];
@@ -138,7 +138,7 @@ As a first step in our re-implementation process, we reconstructed the original 
 program. It is important to note that the code is de-obfuscated to run using Microsoft JScript and isn't necessarily 
 the simplest or most elegant way to write the program, adhering to modern JavaScript best-practices.
 
-\begin{lstlisting}[language=JavaScript, caption={Unobfuscated payload loader}][H]
+\begin{lstlisting}[language=JavaScript, caption={Unobfuscated payload loader}]
 window.resizeTo(0, 0)
 try {
   var data = [104,101, ... ] // payload 
@@ -186,7 +186,7 @@ index provided in the first argument of the function, introducing a layer of ind
 A final noteworthy element in this part of the code is how the path string is saved in the array as a split string, we
 assume this is in order to not be discovered by automated scanners looking for paths.
 
-\begin{lstlisting}[language=JavaScript, label={lst:obfuscated-access}, caption={Obfuscated data retrieval from an array.}][H]
+\begin{lstlisting}[language=JavaScript, label={lst:obfuscated-access}, caption={Obfuscated data retrieval from an array.}]
 var _0x4fba = [
   'OpenTextFile', 'CreateTextFile', '245822eefsqR', '598829yCFgdo',
   'close', '302606ILGEZd', '124169YwNuaX', 'resizeTo', 'Close', 'Write',
@@ -209,7 +209,7 @@ is very rarely used in practice, meaning the average reader will be confused by 
 loader. The complexity is further increased by the use of the function described in listing \ref{lst:obfuscated-access} 
 to further obscure what is actually happening.
 
-\begin{lstlisting}[language=JavaScript, caption={Bracket notation object property access with obfuscated argument.}][H]
+\begin{lstlisting}[language=JavaScript, caption={Bracket notation object property access with obfuscated argument.}]
 // content += String.fromCharCode(data[i])
 content += String[_0x556975(0x1dc)](data[i]); 
 \end{lstlisting}
@@ -219,7 +219,7 @@ For completeness' sake we use the obfuscated loader in the malware recreation, t
 loader as well to verify correctness. The listing below shows the whole obfuscated payload with explanatory comments
 alongside each obfuscated part.
 
-\begin{lstlisting}[language=JavaScript, caption={Obfuscated payload loader.}][H]
+\begin{lstlisting}[language=JavaScript, caption={Obfuscated payload loader.}]
 // Data array used to execute commands
 var _0x4fba = [
   'OpenTextFile', 'CreateTextFile', '245822eefsqR', '598829yCFgdo',
@@ -322,9 +322,9 @@ be a library function, but it turned out to simply be a name for an image conver
 heavily resembled our analysed payload on \url{www.docguard.io}\footnote{\url{
 https://app.docguard.io/0193bd8bcbce9765dbecb288d46286bdc134261e4bff1f3c1f772d34fe4ec695/results/codes}
 [Last accessed 3.6.2022]}. While this function may have not been identical to the one in our analysed payload, it
-provided a good starting point for our testing. %TODO: Amend if Jazi replies to the email.
+provided a good starting point for our testing. 
 
-\begin{lstlisting}[language=VBScript, caption={The image conversion function obtained from a source code dump.}][H]
+\begin{lstlisting}[language=VBScript, caption={The image conversion function obtained from a source code dump.}]
 Public Function WIA_ConvertImage(sInitialImage As String, sOutputImage As String, Optional lQuality As Long = 85) As Boolean
     On Error GoTo Error_Handler
     Dim oWIA As Object   'WIA.ImageFile
@@ -363,7 +363,7 @@ Unfortunately, this function failed to replicate the behaviour we wanted to achi
 malicious \acrfull{HTA} file into a plain ZIP file and attaching it to a \acrshort{PNG} image, we were unable to get the conversion
 function to decompress the appended archive. Since this function is central to the malware obfuscation, the inability to
 recreated presents a large obstacle in verifying the malware functionality. We attempted to contact the original
-researcher for clarification, however we haven't received an answer yet. %TODO: Update if we do
+researcher for clarification, however we haven't received an answer yet.
 Regardless, we believe documenting our recreation process may be meaningful for future research.
 
 The document creation was relatively simple -- after the malicious \acrshort{PNG} is placed into the document, it gets
@@ -377,7 +377,7 @@ into a subdirectory, allowing us to manipulate them programmatically. After this
 avoid the user manipulating the document. In the original attack this is where the lure form was opened, however we
 decided that implementing it would be superfluous.
 
-\begin{lstlisting}[language=VBScript, caption={The malicious document saving itself to extract embedded images.}][H]
+\begin{lstlisting}[language=VBScript, caption={The malicious document saving itself to extract embedded images.}]
     DocName = ActiveDocument.Name
     If InStr(DocName, ".") > 0 Then
         DocName = Left(DocName, InStr(DocName, ".") - 1)
@@ -396,9 +396,10 @@ bug, interestingly, affected string concatenation of the argument passed to \ver
 the variable \verb+Value+ in the concatenation, the result of the concatenation would be just the variable \verb+Value+,
 with the other concatenated elements not being present in the resulting string. Replacing the variable with its
 contents, \verb+mshta+, solved this issue.
+\clearpage % Formatting
 
-\begin{lstlisting}[language=VBScript, label={lst:macro-extraction}, 
-caption={The meat of the macro -- extracting the payload from the converted image and executing it.}][H]
+\begin{lstlisting}[language=VBScript, caption={The meat of the macro -- extracting the payload from the converted image and executing it.},
+   label={lst:macro-extraction}]
     TempPath = TempPath & "_files"
     CreatedImageFilePath = TempPath & "\" & imageFileName
     CreatedImageBMPFilePath = Environ("Temp") & "\" & Left(imageFileName, InStrRev(imageFileName, ".")) & Ext1
@@ -424,7 +425,7 @@ on our GitHub, in the following repository: \url{https://github.com/memoriesadri
 
 \subsection{Requirements to Run}
 Since the recreated malware is designed to run on the Microsoft Windows operating system, running it requires
-an installation of this operating system, preferably Windows 10. %TODO: Test other OS, like win11
+an installation of this operating system, preferably Windows 10. 
 The development of all the tools except for the Word Document itself was conducted on a GNU/Linux system, with all
 the tools being tested on a Windows 10 physical and virtual machine. Aside from the compression mechanism used in this
 work, all tools have been tested on Windows as well.
@@ -473,6 +474,7 @@ compression utility that we were able to find, however if you prefer to use a di
 it instead. To install the \verb+zlib-flate+ utility, one must install the \verb+qpdf+ package with, for example
 \verb+apt install qpdf+ or \verb+pacman -S qpdf+\footnote{Further commands:
 \url{https://command-not-found.com/zlib-flate} [Accessed 4.6.2022]}. 
+\clearpage % Formatting
 
 The script goes through the following steps, which can be followed for manually recreating the malware as well.
 \begin{enumerate}

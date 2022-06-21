@@ -8,9 +8,6 @@
 \loadglsentries{C) Back Matter/acronyms.tex}
 \makeglossaries %https://www.overleaf.com/learn/latex/glossaries
 
-%shows fixme notes
-%\fxsetup{status=draft} % comment/delete this line if you want to your final output
-
 \usepackage[ngerman, british]{babel} %if changed to \usepackage[ngerman]{babel} "Table of contents" changes to "Inhaltsverzeichnis", "abstract" becomes "Zusammenfassung" and "references" is translated to "Literatur".
 
 
@@ -30,14 +27,13 @@
     \tableofcontents{}
     \listoffigures
     \cleardoublepage{}
-    \cleardoublepage{}
     \lstlistoflistings
     \cleardoublepage{}
     \microtypesetup{protrusion=true}
     
 	\pagebreak
 	
-	\mainmatter{}
+	\mainmatter{} 
     \input{B) Chapters/01_motivation}
     \input{B) Chapters/02_related_work}
     \input{B) Chapters/03_idea}

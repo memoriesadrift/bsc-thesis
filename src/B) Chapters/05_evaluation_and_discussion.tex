@@ -39,13 +39,12 @@ addressing elements that were not present in our recreated document. Interesting
 been protected with a password, or else the \verb+Application.ActiveDocument.Unprotect+ function would fail, crashing
 the macro.
 
-\begin{lstlisting}[language=VBScript, caption={Failing function calls from the document protection subroutine}][H]
+\begin{lstlisting}[language=VBScript, caption={Failing function calls from the document protection subroutine}]
     Application.ActiveDocument.Unprotect Password:="taifehjRTYB\$%^45"
     Application.ActiveDocument.Shapes(1).Visible = False
     Bookmarks("main").Range.Font.Hidden = False
 \end{lstlisting}
 
-%TODO: Check this part to make sure!
 A surprising issue that came up in the implementation was also a failure in string concatenation, where for some reason,
 the concatenation of \verb+Value & " " & CreatedImageBMPFilePath+ evaluated simply to \verb+Value+ whereas the
 concatenation of \verb+"mshta" & " " & CreatedImageBMPFilePath+ evaluated correctly. Thus, we had to change the
@@ -152,7 +151,5 @@ to do what the attacker wants, regardless of run-time correctness, other parts o
 we theorise that only this part of the malware execution process needed patching, and we think this has been done, due
 to our inability to reproduce the malware attack in its entirety specifically due to the \acrshort{WIA} image conversion
 not exhibiting the unwanted conversion behaviour.
-
-% TODO: Test on Win7
 \clearpage
 

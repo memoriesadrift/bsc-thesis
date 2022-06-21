@@ -1,6 +1,4 @@
 \chapter{Related Work}
-% TODO: Remove
-\section{Note: I feel like this chapter needs cuts}
 \section{What Is Malware?} \label{sec:malware}
 Though defining malware might seem as a simple task, formally defining it has been a difficult open problem in 
 computer virology for a long time; the precise reasoning for this stems from the fact that each algorithm or
@@ -113,7 +111,6 @@ population growth and be parasitic \cite[p.~14]{aycock-book}. Though viruses spr
 (leading to the positive population growth), they notably don't spread through networks, which is the domain of worms, 
 covered in the following section \cite[p.~15]{aycock-book}.
 
-% TODO: possibly cut
 Viruses are generally noted to be structured in three distinct parts: 
 \begin{itemize}
   \item the \emph{infection vector} -- how the virus spreads across a system. It doesn't necessarily have to be unique,
@@ -124,7 +121,7 @@ Viruses are generally noted to be structured in three distinct parts:
     as the virus payload intending to open a back door to the system, allowing the attacker to access the system and use
     it as part of a botnet.
 \end{itemize}
-\cite[p.~7, p.~27]{viruses-revealed-book,aycock-book} % TODO: Is this citation style correct? 
+\cite[p.~7, p.~27]{viruses-revealed-book,aycock-book}
 
 Viruses, as described, infect files in order to spread and eventually drop their payload. There are numerous ways this
 infection can take place: The file itself can be modified by the virus to contain a copy of the virus in a process known
@@ -133,7 +130,6 @@ correct file after doing whatever it pleases after the user attempts to open the
 shortcut) in what is called a companion virus, or, most importantly for the topic of this work, the virus can be
 embedded in the macro section of a document format that supports macros, for example Microsoft Word \cite{aycock-book,
 skoudis-book}. 
-% TODO: cut end
 
 Macros are a simple tool that was originally intended to increase the productivity of users using word
 processors such as Microsoft Word. Using macros allows the user to run arbitrary code at will, for example when the
@@ -170,13 +166,11 @@ attacker, since the worm rapidly spreads throughout the internet, one victim's c
 an IP address located in Ghana, while the next victim might be infected from a Swiss IP, making attribution, persecution
 as well as countermeasure development more difficult \cite{skoudis-book}.
 
-% TODO: possibly cut
 Worms are structured similarly to viruses, with a few minor differences. Skoudis proposes a model shaped like a missile,
 wherein a worm is described as having a warhead which serves to penetrate the attacked system, a propagation engine,
 scanning engine and target selection algorithm to facilitate the propagation of the worm to appropriately chosen and
 vulnerable victims, and finally a payload to be dropped on infected devices to compromise the system or otherwise cause
 damage to the victim \cite{skoudis-book}.
-% TODO: possibly cut
 
 There are various ways in which a worm can propagate across a network, often being given a name based on the spread 
 mechanism, e.g. \emph{email worm}. Because worms are standalone programs and don't rely on any particular files they can
@@ -322,8 +316,6 @@ extorting money from the victim via ransomware. Data exfiltration was the most c
 covered in the \acrshort{ENISA} supply chain attack threat landscape with 58\% of attacks targeting this asset
 \cite{enisa_supply_chain_threat_landscape}. 
 
-%TODO: Possibly add a description of the SolarWinds attack to provide an example for this 
-
 \subsection{Ransomware}
 The term ransomware describes a category of malware threats used to digitally extort victims 
 by denying access to a device or files, unless a ransom sum is paid, usually in Bitcoin or other 
@@ -338,7 +330,7 @@ perpetration of ransomware schemes \cite{enisa_threat_landscape}. \emph{Zero-day
 attacks that exploit vulnerabilities that have not yet been publicly disclosed \cite{zero-day}. They give the 
 attacker a massive advantage as it's virtually impossible to defend against them because of their nature -- 
 antivirus software has no hash signature to recognise and the software's developers have no chance to patch the
-exploit since they aren't aware of it. These kinds of attacks were previously used mainly by \acrfull{APTs} 
+exploit since they aren't aware of it. These kinds of attacks were previously used mainly by \acrfull{APT}s 
 and nation-state threat actors, mainly due to their immense value as a free pass to
 any target they may wish to attack \cite{enisa_threat_landscape}. The fact that zero-day attacks are becoming more
 common in the ransomware sphere means that the high cost of using a zero-day vulnerability is worth it for the 
@@ -352,7 +344,7 @@ of higher payouts \cite{enisa_threat_landscape}. Additionally, amoral threat act
 vital infrastructure and organisations that rely on access to their data to prevent death of patients
 or hold very important legal data, asking for exorbitant ransom fees which they hope the victims will pay in order
 not to be complicit in ,for example, the death of a patient \cite[p.~17-18]{morphisec_threat_landscape,
-ransomware-book}. %TODO: is this citation correct? p17-18 only apply to the ransomware-book reference
+ransomware-book}. 
 High profile hacks and payouts continue to motivate these threat actors to try and replicate these successes and 
 get a large payout. 
 
@@ -370,7 +362,6 @@ malicious macro-enabled Word documents or exploited PDF files are already among 
 delivery, often as a form of downloading, de-obfuscating or decrypting the code that takes control of the machine
 \cite[p.~8-10]{ransomware-book}.
 
-% TODO: cut
 \subsubsection{Ransomware as a Service (RaaS)}
 As was mentioned in subsection \ref{sec:supply-chain-attacks}, companies are increasingly turning to external service providers 
 for their IT solutions and the same can be said for threat actors. Though distributing malware with the intent of
@@ -457,12 +448,10 @@ development in the current threat landscape:
   or organization might not be a valuable or high-profile target at the present time, the negligible cost of storing
   stolen data could mean that many years in the future, the sensitive information of a potential world leader or
   prominent businessperson could be used to blackmail or extort years or possibly decades after an initial attack.
-  \cite{multiple-extortion-ransomware} %TODO: Is it okay to change a spelling to the BrE spelling in a citation?
+  \cite{multiple-extortion-ransomware} 
 \end{quote}
 We've already been able to see some of their thoughts become reality during the Vastaamo attack, where the second
 development cited can be observed with attackers extorting the victim's customers.
-
-% TODO: cut end
 
 \section{File Format Security}
 Files are a fundamental building block of computing, primarily used to store data and index it by a file name.
@@ -566,7 +555,7 @@ One notable file format specification that uses a terminator to signal the end o
 The \acrshort{PNG} file format is a thoroughly defined format for storing raster images in a well-compressed, portable
 and lossless manner, meant as a replacement for the proprietary, patented \acrfull{GIF} file format \cite{png-standard}.
 It's widely used alongside \acrshort{JPEG} for storing image files, boasting an overall higher quality to the
-\acrshort{JPEG} format, which uses a lossy compression algorithm to store data. % TODO: Cite?
+\acrshort{JPEG} format, which uses a lossy compression algorithm to store data. 
 
 The \acrshort{PNG} file format specifies that each valid \acrshort{PNG} file must end with the four byte sequence 
 \verb+73 69 78 68+, also called \verb+IEND+ in the specification, which signifies the end of the PNG data stream 
