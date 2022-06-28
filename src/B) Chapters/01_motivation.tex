@@ -28,8 +28,8 @@ and with the multitude of formats supported and used over the decades of computi
 there would be a way to misuse some format in some way -- that being \acrshort{PNG} in this case. 
 I believe it is valuable to recreate this attack to shed light on how potential future attacks could be carried out.
 
-Out of interest as well as scientific rigour I will attempt to recreate this malware, and analyse its effectiveness,
-foregoing the malicious payload and causing no damage in the process. The main questions I will seek to answer are the following:
+Out of interest as well as scientific rigour I attempt to recreate this malware, and analyse its effectiveness,
+foregoing the malicious payload and causing no damage in the process. The main questions I seek to answer are the following:
 \begin{itemize}
   \item How can a file hide malicious content?
   \item How can a concealed malicious payload be extracted from a file and executed?
@@ -38,26 +38,24 @@ foregoing the malicious payload and causing no damage in the process. The main q
   \item Are common systems still vulnerable?
 \end{itemize}
 
-Thus, the primary goal of this work will be to recreate the malicious Microsoft Word document along with the image
+Thus, the primary goal of this work is to recreate the malicious Microsoft Word document along with the image
 payload and secondary mocked \acrfull{EXE} payload without the actual \acrlong{rat}. Recreating this malware should help
 verify the reproducibility of the attack and its functionality as well as help gain further
 insight into how vulnerable current systems are to a similar attack, if at all. Furthermore, this analysis may yield
 advice other than the simple adage of not opening macro-enabled documents. Though, of course, this is always the best
 protection mechanism against malware using \acrshort{VBA} macros as their attack vector.
 
-To achieve this goal we will create a facsimile of the malicious document as well as the payload it carried.
-This recreation will be based on the postmortem report of the attack written by Hossein Jazi. 
-The first part of the recreation will be a dummy \acrlong{EXE} containing a simple program that indicates the 
-system would have been compromised if the attack was real. This \acrshort{EXE} will then be hidden in the \acrshort{BMP}
-the same way as in the original attack and embedded in the macro-enabled Word document, analogous to the attack.
-Finally, we will be executing this faux-malicious document inside virtual machines running the Windows operating system
-and tracking how it executes in comparison to the original attack. 
+To achieve this goal we create a facsimile of the malicious document as well as the payload it carried.
+This recreation is based on the postmortem report of the attack written by Hossein Jazi. 
+The first part of the recreation is a dummy \acrlong{EXE} containing a simple program that indicates the 
+system would have been compromised if the attack was real. This \acrshort{EXE} will be hidden in the \acrshort{PNG}
+and embedded in the macro-enabled Word document, analogous to the attack.
+Finally, I execute this faux-malicious document inside a virtual machine running the Windows operating system
+and track how it executes in comparison to the original attack. 
 
-The metrics for measuring the success of this experiment will be rather simple -- recreating the attack in its full
-scale will be a full success, while failure after at least one part of the attack succeeds will be deemed a partial
-success. If the recreated attack is successful, we will further test its functionality on a range of virtual machines
-running the currently supported versions of the Windows operating system to see if the attack can be reproduced on all,
-or only some versions. We will also keep an eye out on when or whether antivirus software detects the payload.
+The metrics for measuring the success of this experiment are rather simple -- recreating the attack in its full
+scale is deemed a full success, while failure after at least one part of the attack succeeds is deemed a partial
+success. We also keep an eye out on when or whether antivirus software detects the payload.
 
 In summary, recreating this attack can lend insight into how file formats can be misused to carry malicious payloads and
 avoid detection while doing so. It also serves as an effort to validate the previous research done of this malware and
